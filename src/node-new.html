@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>신규 ContentNode — SEO 운영 콘솔</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Asta+Sans:wght@300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+  <div class="app">
+
+    <aside class="app__sidebar">
+      <div class="sidebar">
+        <div class="sidebar__brand">
+          <span class="sidebar__brand-eyebrow">SEO 운영</span>
+          <h1 class="sidebar__brand-title">다(多)테마 ×<br>지역 콘솔</h1>
+        </div>
+        <nav class="sidebar__nav" aria-label="대시보드 뷰">
+          <div class="sidebar__nav-group">
+            <span class="sidebar__nav-group-label">전체</span>
+            <ul class="sidebar__nav-list">
+              <li><a class="sidebar__nav-link" href="./index.html">개요</a></li>
+            </ul>
+          </div>
+          <div class="sidebar__nav-group">
+            <span class="sidebar__nav-group-label">사이트맵 5개 뷰</span>
+            <ul class="sidebar__nav-list">
+              <li><a class="sidebar__nav-link" href="./tree.html">발행 트리<span class="sidebar__nav-count">50</span></a></li>
+              <li><a class="sidebar__nav-link" href="./matrix.html">데이터 매트릭스<span class="sidebar__nav-count">85</span></a></li>
+              <li><a class="sidebar__nav-link" href="./heatmap.html">KPI 히트맵</a></li>
+              <li><a class="sidebar__nav-link" href="./silo.html">사일로 무결성<span class="sidebar__nav-count sidebar__nav-count--alert">3</span></a></li>
+              <li><a class="sidebar__nav-link" href="./queue.html">갱신 큐<span class="sidebar__nav-count">14</span></a></li>
+            </ul>
+          </div>
+          <div class="sidebar__nav-group">
+            <span class="sidebar__nav-group-label">엔티티 관리</span>
+            <ul class="sidebar__nav-list">
+              <li><a class="sidebar__nav-link sidebar__nav-link--active" href="./node-new.html">신규 노드</a></li>
+              <li><a class="sidebar__nav-link" href="./authors.html">작성자<span class="sidebar__nav-count">4</span></a></li>
+            </ul>
+          </div>
+          <div class="sidebar__nav-group">
+            <span class="sidebar__nav-group-label">점검</span>
+            <ul class="sidebar__nav-list">
+              <li><a class="sidebar__nav-link" href="./risk.html">위험 지표</a></li>
+            </ul>
+          </div>
+        </nav>
+        <div class="sidebar__phase">
+          <span class="sidebar__phase-label">현재 단계</span>
+          <strong class="sidebar__phase-value">Phase 2</strong>
+          <span class="sidebar__phase-detail">Month 4 · 시도 허브 22 / 51</span>
+        </div>
+        <div class="sidebar__user">
+          <div class="sidebar__user-avatar" aria-hidden="true">김</div>
+          <div class="sidebar__user-body">
+            <span class="sidebar__user-name">김주원</span>
+            <span class="sidebar__user-role">SEO 운영자</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="app__main">
+      <div class="app__main-inner">
+
+        <header class="page-header">
+          <div class="page-header__heading">
+            <span class="page-header__eyebrow">엔티티 관리 · ContentNode</span>
+            <h2 class="page-header__title">신규 노드 생성</h2>
+            <p class="page-header__subtitle">URL은 코드가 결정합니다. (theme, region) 조합과 작성자만 고르세요.</p>
+          </div>
+          <div class="page-header__meta">
+            <a class="button button--ghost button--sm" href="./tree.html">취소</a>
+          </div>
+        </header>
+
+        <div class="page-grid">
+
+          <div class="page-grid__main">
+
+            <section class="panel" aria-labelledby="form-title">
+              <header class="panel__header">
+                <div class="panel__heading">
+                  <h3 class="panel__title" id="form-title">노드 정의</h3>
+                  <p class="panel__subtitle">초기 status는 자동으로 <strong>draft</strong>입니다. DataPoint 5건 검증 후 live로 전환할 수 있습니다.</p>
+                </div>
+              </header>
+              <div class="panel__body">
+                <form class="form" autocomplete="off">
+
+                  <div class="form__row">
+                    <div class="field">
+                      <label class="field__label" for="node-theme">테마<span class="field__label-required">*</span></label>
+                      <select class="field__control" id="node-theme" name="theme_id">
+                        <option value="">— 선택 —</option>
+                        <option value="1" selected>tutoring · 과외</option>
+                        <option value="2">academy · 학원</option>
+                        <option value="3">contents · 학습 콘텐츠</option>
+                        <option value="4">tools · 수업 도구</option>
+                        <option value="5">guides · 정보형 (region 없음)</option>
+                      </select>
+                      <span class="field__hint">depth ≤ 2 제약. 3차 이상은 사일로가 흩어집니다.</span>
+                    </div>
+                    <div class="field">
+                      <label class="field__label" for="node-region">지역</label>
+                      <select class="field__control" id="node-region" name="region_id">
+                        <option value="">— 시도 무관 (테마 허브) —</option>
+                        <optgroup label="시도 (depth 1)">
+                          <option>seoul · 서울특별시</option>
+                          <option>gyeonggi · 경기도</option>
+                          <option>incheon · 인천광역시</option>
+                          <option>busan · 부산광역시</option>
+                        </optgroup>
+                        <optgroup label="시군구 (depth 2)">
+                          <option>seoul/gangnam-gu · 강남구</option>
+                          <option selected>seoul/seocho-gu · 서초구</option>
+                          <option>seoul/songpa-gu · 송파구</option>
+                          <option>gyeonggi/gunpo-si · 군포시</option>
+                          <option>gyeonggi/anyang-si · 안양시</option>
+                          <option>incheon/yeonsu-gu · 연수구</option>
+                        </optgroup>
+                        <optgroup label="동 (depth 3) — Phase 4">
+                          <option>seoul/gangnam-gu/daechi-dong · 대치동</option>
+                          <option>seoul/gangnam-gu/yeoksam-dong · 역삼동</option>
+                        </optgroup>
+                      </select>
+                      <span class="field__hint">시도 무관이면 테마 허브 또는 정보형 페이지가 됩니다.</span>
+                    </div>
+                  </div>
+
+                  <div class="field">
+                    <label class="field__label">URL (자동 도출)</label>
+                    <div class="url-preview">
+                      <span class="url-preview__path">https://example.com/tutoring/seoul/seocho-gu/</span>
+                      <span class="url-preview__formula">url(node) = "/" + theme_path(node.theme) + "/" + region_path(node.region) + "/"</span>
+                    </div>
+                  </div>
+
+                  <div class="form__row">
+                    <div class="field">
+                      <label class="field__label" for="node-author">작성자<span class="field__label-required">*</span></label>
+                      <select class="field__control" id="node-author" name="author_id">
+                        <option value="">— 선택 —</option>
+                        <option value="1">김주원 · Editorial Lead</option>
+                        <option value="2" selected>박서영 · 수학 과외 전문</option>
+                        <option value="3">이정훈 · 영어 학습 컨설턴트</option>
+                        <option value="4">최민지 · 학원·교육 분석가</option>
+                      </select>
+                      <span class="field__hint">검증된(verified) 작성자만 선택 가능. <a href="./authors.html" style="color: var(--c-accent);">작성자 관리 →</a></span>
+                    </div>
+                    <div class="field">
+                      <label class="field__label" for="node-template">본문 템플릿<span class="field__label-required">*</span></label>
+                      <select class="field__control" id="node-template" name="body_template_id">
+                        <option>tpl_hub_v3 — 테마 허브</option>
+                        <option>tpl_sido_v3 — 시도 페이지</option>
+                        <option selected>tpl_gu_v3 — 시군구 페이지</option>
+                        <option>tpl_dong_v3 — 동 페이지</option>
+                        <option>tpl_info_v2 — 정보형 가이드</option>
+                      </select>
+                      <span class="field__hint">10개 섹션 구조. 3·4·5번이 데이터 게이트 대상.</span>
+                    </div>
+                  </div>
+
+                  <div class="field">
+                    <label class="field__label" for="node-intro">직접 답변 블록 (intro_text)<span class="field__label-required">*</span></label>
+                    <textarea class="field__control field__control--textarea" id="node-intro" name="intro_text" rows="4" placeholder="2~3문장. AI 검색이 직접 인용할 수 있는 핵심 답변. 예: '서초구는 의대 입시 준비 비율이 33%로 송파구 대비 약 15%p 높으며, 평균 시간당 단가는 ₩45,000입니다.'"></textarea>
+                    <span class="field__hint">발행 게이트 대상 — 작성되지 않으면 live 전환 불가.</span>
+                  </div>
+
+                  <div class="form__actions">
+                    <button class="button" type="reset">초기화</button>
+                    <button class="button button--primary" type="submit">draft로 저장</button>
+                  </div>
+                </form>
+              </div>
+            </section>
+
+          </div>
+
+          <aside class="page-grid__aside">
+
+            <!-- 사전 검증 -->
+            <section class="panel" aria-labelledby="check-title">
+              <header class="panel__header">
+                <div class="panel__heading">
+                  <h3 class="panel__title" id="check-title">사전 검증</h3>
+                  <p class="panel__subtitle">DB 트리거가 실제 INSERT 시점에 한 번 더 검사합니다.</p>
+                </div>
+              </header>
+              <div class="panel__body">
+                <div class="gate">
+                  <div class="gate__item">
+                    <span class="gate__check gate__check--pass" aria-hidden="true">✓</span>
+                    <div class="gate__body">
+                      <span class="gate__title">(theme, region) UNIQUE</span>
+                      <span class="gate__detail">기존 노드 없음 — 신규 조합</span>
+                    </div>
+                  </div>
+                  <div class="gate__item">
+                    <span class="gate__check gate__check--pass" aria-hidden="true">✓</span>
+                    <div class="gate__body">
+                      <span class="gate__title">부모 노드 존재</span>
+                      <span class="gate__detail">/tutoring/seoul/ (depth 1, live)</span>
+                    </div>
+                  </div>
+                  <div class="gate__item">
+                    <span class="gate__check gate__check--pass" aria-hidden="true">✓</span>
+                    <div class="gate__body">
+                      <span class="gate__title">depth 정합</span>
+                      <span class="gate__detail">node depth = parent depth + 1 = 2</span>
+                    </div>
+                  </div>
+                  <div class="gate__item">
+                    <span class="gate__check gate__check--pass" aria-hidden="true">✓</span>
+                    <div class="gate__body">
+                      <span class="gate__title">URL 충돌 없음</span>
+                      <span class="gate__detail">/tutoring/seoul/seocho-gu/ 미사용</span>
+                    </div>
+                  </div>
+                  <div class="gate__item">
+                    <span class="gate__check gate__check--pass" aria-hidden="true">✓</span>
+                    <div class="gate__body">
+                      <span class="gate__title">작성자 verified</span>
+                      <span class="gate__detail">박서영 · verified_at 2026-02-14</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="gate__summary">
+                  <span>저장 가능</span>
+                  <span>5 / 5</span>
+                </div>
+              </div>
+            </section>
+
+            <!-- 발행 흐름 -->
+            <section class="panel" aria-labelledby="flow-title">
+              <header class="panel__header">
+                <div class="panel__heading">
+                  <h3 class="panel__title" id="flow-title">발행 흐름</h3>
+                  <p class="panel__subtitle">draft → DataPoint 5건 → live</p>
+                </div>
+              </header>
+              <div class="panel__body">
+                <ul class="rules">
+                  <li class="rules__item">
+                    <span class="rules__index">1</span>
+                    <div class="rules__body">
+                      <span class="rules__title">draft 저장</span>
+                      <span class="rules__detail">노드 생성. URL 자동 등록되지만 sitemap.xml에는 미포함.</span>
+                    </div>
+                    <span class="rules__status">지금</span>
+                  </li>
+                  <li class="rules__item">
+                    <span class="rules__index">2</span>
+                    <div class="rules__body">
+                      <span class="rules__title">DataPoint 추가</span>
+                      <span class="rules__detail">정량 1+ · 정성 3+ · 비교 1+ 권장. 검증 토글 필수.</span>
+                    </div>
+                    <span class="rules__status">데일리</span>
+                  </li>
+                  <li class="rules__item">
+                    <span class="rules__index">3</span>
+                    <div class="rules__body">
+                      <span class="rules__title">검증 5건 도달</span>
+                      <span class="rules__detail">data_count(verified=true) ≥ 5 → 매트릭스 ◐ → ●</span>
+                    </div>
+                    <span class="rules__status">자동 알림</span>
+                  </li>
+                  <li class="rules__item">
+                    <span class="rules__index">4</span>
+                    <div class="rules__body">
+                      <span class="rules__title">status = 'live'</span>
+                      <span class="rules__detail">DB 트리거 검증 후 발행 · sitemap.xml 자동 등록</span>
+                    </div>
+                    <span class="rules__status">운영자</span>
+                  </li>
+                </ul>
+              </div>
+            </section>
+
+          </aside>
+
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+</body>
+</html>
