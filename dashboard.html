@@ -1,0 +1,1765 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>운영 대시보드 — 다(多)테마 × 지역 SEO</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Asta+Sans:wght@300..800&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       토큰 — 1rem 기준, 스칼라 값은 2배수
+       ========================================================= */
+    :root {
+      /* 간격 스케일 (모두 2의 거듭제곱·짝수 픽셀에 대응) */
+      --space-2:   0.125rem;   /*  2px */
+      --space-4:   0.25rem;    /*  4px */
+      --space-8:   0.5rem;     /*  8px */
+      --space-12:  0.75rem;    /* 12px */
+      --space-16:  1rem;       /* 16px */
+      --space-24:  1.5rem;     /* 24px */
+      --space-32:  2rem;       /* 32px */
+      --space-48:  3rem;       /* 48px */
+      --space-64:  4rem;       /* 64px */
+      --space-96:  6rem;       /* 96px */
+      --space-128: 8rem;       /*128px */
+
+      /* 타이포 스케일 (1rem = 본문 기본) */
+      --font-sm:   0.75rem;
+      --font-md:   1rem;
+      --font-lg:   1.25rem;
+      --font-xl:   1.5rem;
+      --font-2xl:  2rem;
+      --font-3xl:  3rem;
+
+      --line-tight:  1.25;
+      --line-snug:   1.375;
+      --line-normal: 1.5;
+      --line-loose:  1.625;
+
+      /* 색 — 무채 베이스에 보고서 분류색 */
+      --c-bg:        #f7f6f2;
+      --c-surface:   #ffffff;
+      --c-surface-2: #faf9f5;
+      --c-border:    #e6e4dd;
+      --c-border-2:  #efede6;
+
+      --c-text:      #1a1a1a;
+      --c-text-2:    #5a5a56;
+      --c-text-3:    #8a8a84;
+
+      --c-ink:       #111111;
+      --c-accent:    #2d4a7a;
+
+      /* 상태 색 — 발행 게이트의 ●◐○에 매핑 */
+      --c-live:      #2d7a4f;   /* live · data ≥ 5 */
+      --c-live-bg:   #e6f1ea;
+      --c-noindex:   #b8782c;   /* noindex · data 1~4 */
+      --c-noindex-bg:#f5ebd9;
+      --c-dead:      #99918a;   /* dead/draft · data 0 */
+      --c-dead-bg:   #ecebe6;
+      --c-danger:    #a83a3a;
+      --c-danger-bg: #f3e1e1;
+
+      /* 그림자 */
+      --shadow-1: 0 0.0625rem 0.125rem rgba(20,20,16,0.04);
+      --shadow-2: 0 0.125rem 0.5rem rgba(20,20,16,0.06);
+
+      --radius-4: 0.25rem;
+      --radius-8: 0.5rem;
+    }
+
+    /* =========================================================
+       리셋 / 베이스
+       ========================================================= */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { font-size: 100%; }
+    body {
+      margin: 0;
+      font-family: "Asta Sans", system-ui, sans-serif;
+      font-size: var(--font-md);
+      line-height: var(--line-normal);
+      font-weight: 400;
+      color: var(--c-text);
+      background: var(--c-bg);
+      -webkit-font-smoothing: antialiased;
+      font-feature-settings: "ss01", "ss02";
+    }
+    h1, h2, h3, h4, h5, h6, p, ul, ol { margin: 0; }
+    ul, ol { padding: 0; list-style: none; }
+    button { font: inherit; color: inherit; cursor: pointer; }
+    table { border-collapse: collapse; width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* =========================================================
+       대시보드 셸 — 블록: dashboard
+       ========================================================= */
+    .dashboard {
+      display: grid;
+      grid-template-columns: 1fr;
+      max-width: 96rem;
+      margin: 0 auto;
+      padding: var(--space-24) var(--space-32) var(--space-64);
+      gap: var(--space-24);
+    }
+
+    /* =========================================================
+       블록: topbar
+       ========================================================= */
+    .topbar {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: var(--space-32);
+      padding-bottom: var(--space-24);
+      border-bottom: 0.0625rem solid var(--c-border);
+    }
+    .topbar__brand {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+    .topbar__eyebrow {
+      font-size: var(--font-sm);
+      font-weight: 500;
+      letter-spacing: 0.125em;
+      text-transform: uppercase;
+      color: var(--c-text-3);
+    }
+    .topbar__title {
+      font-size: var(--font-2xl);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: var(--line-tight);
+    }
+    .topbar__subtitle {
+      font-size: var(--font-md);
+      font-weight: 400;
+      color: var(--c-text-2);
+    }
+    .topbar__meta {
+      display: flex;
+      align-items: center;
+      gap: var(--space-16);
+      font-size: var(--font-sm);
+      color: var(--c-text-2);
+    }
+    .topbar__meta-item {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: var(--space-2);
+    }
+    .topbar__meta-label {
+      font-size: var(--font-sm);
+      color: var(--c-text-3);
+    }
+    .topbar__meta-value {
+      font-size: var(--font-md);
+      font-weight: 600;
+      color: var(--c-text);
+    }
+    .topbar__divider {
+      width: 0.0625rem;
+      height: var(--space-32);
+      background: var(--c-border);
+    }
+
+    /* =========================================================
+       블록: phase-tracker — Phase 0 → 4
+       ========================================================= */
+    .phase-tracker {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-12);
+      padding: var(--space-24);
+      background: var(--c-surface);
+      border: 0.0625rem solid var(--c-border);
+      border-radius: var(--radius-8);
+      box-shadow: var(--shadow-1);
+    }
+    .phase-tracker__header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--space-16);
+    }
+    .phase-tracker__title {
+      font-size: var(--font-md);
+      font-weight: 600;
+    }
+    .phase-tracker__current {
+      font-size: var(--font-sm);
+      color: var(--c-text-2);
+    }
+    .phase-tracker__current strong {
+      color: var(--c-text);
+      font-weight: 600;
+    }
+    .phase-tracker__steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: var(--space-8);
+    }
+    .phase-tracker__step {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+      padding: var(--space-12) var(--space-16);
+      border: 0.0625rem solid var(--c-border);
+      border-radius: var(--radius-4);
+      background: var(--c-surface-2);
+    }
+    .phase-tracker__step--done {
+      background: var(--c-live-bg);
+      border-color: var(--c-live);
+    }
+    .phase-tracker__step--current {
+      background: var(--c-surface);
+      border-color: var(--c-ink);
+      box-shadow: 0 0 0 0.125rem rgba(17,17,17,0.06);
+    }
+    .phase-tracker__step-label {
+      font-size: var(--font-sm);
+      color: var(--c-text-3);
+      letter-spacing: 0.075em;
+      text-transform: uppercase;
+    }
+    .phase-tracker__step-name {
+      font-size: var(--font-md);
+      font-weight: 600;
+      line-height: var(--line-snug);
+    }
+    .phase-tracker__step-meta {
+      font-size: var(--font-sm);
+      color: var(--c-text-2);
+    }
+    .phase-tracker__step--done .phase-tracker__step-label {
+      color: var(--c-live);
+    }
+    .phase-tracker__step--current .phase-tracker__step-label {
+      color: var(--c-ink);
+    }
+
+    /* =========================================================
+       블록: kpi-grid / kpi-card
+       ========================================================= */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: var(--space-16);
+    }
+    .kpi-card {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+      padding: var(--space-24);
+      background: var(--c-surface);
+      border: 0.0625rem solid var(--c-border);
+      border-radius: var(--radius-8);
+      box-shadow: var(--shadow-1);
+    }
+    .kpi-card__label {
+      font-size: var(--font-sm);
+      color: var(--c-text-2);
+      font-weight: 500;
+      letter-spacing: 0.025em;
+    }
+    .kpi-card__value {
+      font-size: var(--font-2xl);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: var(--line-tight);
+    }
+    .kpi-card__unit {
+      font-size: var(--font-md);
+      font-weight: 500;
+      color: var(--c-text-3);
+      margin-left: var(--space-4);
+    }
+    .kpi-card__delta {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-4);
+      font-size: var(--font-sm);
+      font-weight: 500;
+      color: var(--c-text-2);
+    }
+    .kpi-card__delta--up   { color: var(--c-live); }
+    .kpi-card__delta--down { color: var(--c-danger); }
+    .kpi-card__target {
+      font-size: var(--font-sm);
+      color: var(--c-text-3);
+      border-top: 0.0625rem dashed var(--c-border);
+      padding-top: var(--space-8);
+      margin-top: var(--space-4);
+    }
+
+    /* =========================================================
+       블록: layout — 메인 2단 그리드
+       ========================================================= */
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 22rem;
+      gap: var(--space-24);
+      align-items: start;
+    }
+    .layout__main {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-24);
+      min-width: 0;
+    }
+    .layout__aside {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-24);
+      min-width: 0;
+      position: sticky;
+      top: var(--space-16);
+    }
+
+    /* =========================================================
+       블록: panel — 모든 위젯의 공통 컨테이너
+       ========================================================= */
+    .panel {
+      background: var(--c-surface);
+      border: 0.0625rem solid var(--c-border);
+      border-radius: var(--radius-8);
+      box-shadow: var(--shadow-1);
+      overflow: hidden;
+    }
+    .panel__header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--space-16);
+      padding: var(--space-24) var(--space-24) var(--space-12);
+    }
+    .panel__heading {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+    .panel__title {
+      font-size: var(--font-lg);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .panel__subtitle {
+      font-size: var(--font-sm);
+      color: var(--c-text-2);
+    }
+    .panel__actions {
+      display: flex;
+      gap: var(--space-8);
+      font-size: var(--font-sm);
+      color: var(--c-text-2);
+    }
+    .panel__action-link {
+      color: var(--c-accent);
+      font-weight: 500;
+    }
+    .panel__body {
+      padding: var(--space-12) var(--space-24) var(--space-24);
+    }
+    .panel__body--flush { padding: 0; }
+    .panel__footer {
+      padding: var(--space-12) var(--space-24);
+      border-top: 0.0625rem solid var(--c-border-2);
+      background: var(--c-surface-2);
+      font-size: var(--font-sm);
+      color: var(--c-text-2);
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-16);
+    }
+
+    /* =========================================================
+       블록: badge — 상태 표시
+       ========================================================= */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-4);
+      padding: var(--space-2) var(--space-8);
+      font-size: var(--font-sm);
+      font-weight: 500;
+      line-height: 1.2;
+      border-radius: 0.75rem;
+      background: var(--c-dead-bg);
+      color: var(--c-text-2);
+      white-space: nowrap;
+    }
+    .badge--live    { background: var(--c-live-bg);    color: var(--c-live); }
+    .badge--noindex { background: var(--c-noindex-bg); color: var(--c-noindex); }
+    .badge--draft   { background: var(--c-dead-bg);    color: var(--c-text-2); }
+    .badge--dead    { background: var(--c-dead-bg);    color: var(--c-text-3); text-decoration: line-through; }
+    .badge--danger  { background: var(--c-danger-bg);  color: var(--c-danger); }
+    .badge--ink     { background: var(--c-ink);        color: var(--c-surface); }
+    .badge__dot {
+      width: var(--space-8);
+      height: var(--space-8);
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    /* =========================================================
+       블록: queue (갱신 큐 뷰)
+       ========================================================= */
+    .queue {
+      display: flex;
+      flex-direction: column;
+    }
+    .queue__group {
+      border-top: 0.0625rem solid var(--c-border-2);
+    }
+    .queue__group:first-child { border-top: 0; }
+    .queue__group-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-12);
+      padding: var(--space-12) var(--space-24);
+      background: var(--c-surface-2);
+    }
+    .queue__group-title {
+      font-size: var(--font-sm);
+      font-weight: 600;
+      color: var(--c-text);
+      letter-spacing: 0.025em;
+    }
+    .queue__group-count {
+      font-size: var(--font-sm);
+      color: var(--c-text-3);
+    }
+    .queue__list {
+      display: flex;
+      flex-direction: column;
+    }
+    .queue-item {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: var(--space-12);
+      align-items: center;
+      padding: var(--space-12) var(--space-24);
+      border-top: 0.0625rem solid var(--c-border-2);
+    }
+    .queue-item:first-child { border-top: 0; }
+    .queue-item__priority {
+      width: var(--space-24);
+      height: var(--space-24);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--font-sm);
+      font-weight: 700;
+      border-radius: 50%;
+      background: var(--c-dead-bg);
+      color: var(--c-text-2);
+    }
+    .queue-item__priority--p1 { background: var(--c-danger-bg);  color: var(--c-danger); }
+    .queue-item__priority--p2 { background: var(--c-noindex-bg); color: var(--c-noindex); }
+    .queue-item__priority--p3 { background: var(--c-live-bg);    color: var(--c-live); }
+    .queue-item__priority--p4 { background: var(--c-dead-bg);    color: var(--c-text-2); }
+    .queue-item__body {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      min-width: 0;
+    }
+    .queue-item__url {
+      font-size: var(--font-md);
+      font-weight: 500;
+      color: var(--c-text);
+      font-feature-settings: "tnum";
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .queue-item__reason {
+      font-size: var(--font-sm);
+      color: var(--c-text-2);
+    }
+    .queue-item__meta {
+      display: flex;
+      align-items: center;
+      gap: var(--space-8);
+      font-size: var(--font-sm);
+      color: var(--c-text-3);
+    }
+
+    /* =========================================================
+       블록: matrix (데이터 매트릭스 뷰)
+       ========================================================= */
+    .matrix {
+      overflow-x: auto;
+    }
+    .matrix__table {
+      font-size: var(--font-sm);
+      min-width: 32rem;
+    }
+    .matrix__corner,
+    .matrix__col-head,
+    .matrix__row-head {
+      font-weight: 600;
+      color: var(--c-text);
+      text-align: left;
+      padding: var(--space-12) var(--space-16);
+      background: var(--c-surface-2);
+      border-bottom: 0.0625rem solid var(--c-border-2);
+    }
+    .matrix__col-head { text-align: center; white-space: nowrap; }
+    .matrix__row-head { white-space: nowrap; }
+    .matrix__cell {
+      text-align: center;
+      padding: var(--space-12) var(--space-16);
+      border-bottom: 0.0625rem solid var(--c-border-2);
+      border-left: 0.0625rem solid var(--c-border-2);
+    }
+    .matrix__row-head { border-left: 0; }
+    .matrix__cell-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-4);
+      font-size: var(--font-md);
+      font-weight: 600;
+      width: 2.5rem;
+      height: 2rem;
+      border-radius: var(--radius-4);
+    }
+    .matrix__cell-mark--live    { color: var(--c-live);    background: var(--c-live-bg); }
+    .matrix__cell-mark--noindex { color: var(--c-noindex); background: var(--c-noindex-bg); }
+    .matrix__cell-mark--dead    { color: var(--c-text-3);  background: var(--c-dead-bg); }
+    .matrix__cell-count {
+      font-size: var(--font-sm);
+      font-weight: 600;
+      font-feature-settings: "tnum";
+    }
+    .matrix__legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-16);
+      font-size: var(--font-sm);
+      color: var(--c-text-2);
+    }
+    .matrix__legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-8);
+    }
+    .matrix__legend-mark {
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .matrix__legend-mark--live    { background: var(--c-live); }
+    .matrix__legend-mark--noindex {
+      background: radial-gradient(var(--c-noindex) 50%, transparent 51%),
+                  conic-gradient(var(--c-noindex) 50%, var(--c-noindex-bg) 50%);
+    }
+    .matrix__legend-mark--dead    {
+      background: var(--c-surface);
+      border: 0.125rem solid var(--c-text-3);
+    }
+
+    /* =========================================================
+       블록: tree (발행 트리 뷰)
+       ========================================================= */
+    .tree {
+      font-size: var(--font-sm);
+    }
+    .tree__list { padding-left: 0; }
+    .tree__list--nested {
+      padding-left: var(--space-16);
+      border-left: 0.0625rem dashed var(--c-border);
+      margin-left: var(--space-12);
+    }
+    .tree-node {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: var(--space-12);
+      padding: var(--space-8) var(--space-12);
+      border-radius: var(--radius-4);
+    }
+    .tree-node:hover { background: var(--c-surface-2); }
+    .tree-node__url {
+      font-size: var(--font-sm);
+      color: var(--c-text);
+      font-weight: 500;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .tree-node__url--hub { font-weight: 700; }
+    .tree-node__icon {
+      width: var(--space-16);
+      text-align: center;
+      color: var(--c-text-3);
+      font-size: var(--font-sm);
+    }
+    .tree-node__meta {
+      display: flex;
+      align-items: center;
+      gap: var(--space-8);
+      font-size: var(--font-sm);
+      color: var(--c-text-2);
+    }
+    .tree-node__data {
+      font-feature-settings: "tnum";
+      color: var(--c-text-2);
+      font-size: var(--font-sm);
+    }
+    .tree-node__data--low { color: var(--c-noindex); font-weight: 500; }
+    .tree-node__data--ok  { color: var(--c-live); }
+
+    /* =========================================================
+       블록: heatmap (KPI 히트맵 뷰)
+       ========================================================= */
+    .heatmap {
+      width: 100%;
+      font-size: var(--font-sm);
+    }
+    .heatmap__head th {
+      font-weight: 600;
+      color: var(--c-text-2);
+      text-align: right;
+      padding: var(--space-8) var(--space-12);
+      border-bottom: 0.0625rem solid var(--c-border);
+      font-size: var(--font-sm);
+    }
+    .heatmap__head th:first-child { text-align: left; }
+    .heatmap__cell {
+      padding: var(--space-12);
+      border-bottom: 0.0625rem solid var(--c-border-2);
+      text-align: right;
+      font-feature-settings: "tnum";
+    }
+    .heatmap__cell:first-child {
+      text-align: left;
+      font-weight: 500;
+      color: var(--c-text);
+    }
+    .heatmap__cell--judge { width: 8rem; }
+    .heatmap__cell-bar {
+      display: inline-block;
+      height: var(--space-4);
+      border-radius: var(--space-2);
+      background: var(--c-live);
+      vertical-align: middle;
+      margin-right: var(--space-8);
+      max-width: 6rem;
+    }
+    .heatmap__cell-bar--mid  { background: var(--c-noindex); }
+    .heatmap__cell-bar--low  { background: var(--c-dead); }
+    .heatmap__judge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-4);
+      font-size: var(--font-sm);
+      font-weight: 500;
+    }
+    .heatmap__judge--ok    { color: var(--c-live); }
+    .heatmap__judge--warn  { color: var(--c-noindex); }
+    .heatmap__judge--alert { color: var(--c-danger); }
+
+    /* =========================================================
+       블록: silo (사일로 무결성 알림)
+       ========================================================= */
+    .silo__list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-12);
+    }
+    .silo-alert {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: var(--space-12);
+      padding: var(--space-12) var(--space-16);
+      border: 0.0625rem solid var(--c-border-2);
+      border-radius: var(--radius-4);
+      background: var(--c-surface-2);
+    }
+    .silo-alert--danger { background: var(--c-danger-bg); border-color: rgba(168,58,58,0.3); }
+    .silo-alert--warn   { background: var(--c-noindex-bg); border-color: rgba(184,120,44,0.3); }
+    .silo-alert__icon {
+      width: var(--space-24);
+      height: var(--space-24);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--font-md);
+      font-weight: 700;
+      border-radius: 50%;
+      background: var(--c-surface);
+      color: var(--c-danger);
+    }
+    .silo-alert--warn .silo-alert__icon { color: var(--c-noindex); }
+    .silo-alert__body {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+    .silo-alert__title {
+      font-size: var(--font-sm);
+      font-weight: 600;
+      color: var(--c-text);
+    }
+    .silo-alert__detail {
+      font-size: var(--font-sm);
+      color: var(--c-text-2);
+      line-height: var(--line-snug);
+    }
+    .silo-alert__url {
+      font-size: var(--font-sm);
+      color: var(--c-accent);
+      font-weight: 500;
+    }
+
+    /* =========================================================
+       블록: risk-list (위험 지표)
+       ========================================================= */
+    .risk-list {
+      display: flex;
+      flex-direction: column;
+    }
+    .risk-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--space-12);
+      align-items: center;
+      padding: var(--space-16) 0;
+      border-top: 0.0625rem solid var(--c-border-2);
+    }
+    .risk-item:first-child { border-top: 0; padding-top: 0; }
+    .risk-item:last-child  { padding-bottom: 0; }
+    .risk-item__label {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .risk-item__name {
+      font-size: var(--font-sm);
+      font-weight: 500;
+      color: var(--c-text);
+    }
+    .risk-item__threshold {
+      font-size: var(--font-sm);
+      color: var(--c-text-3);
+    }
+    .risk-item__value {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-4);
+      font-size: var(--font-md);
+      font-weight: 600;
+      font-feature-settings: "tnum";
+    }
+    .risk-item__value--ok    { color: var(--c-live); }
+    .risk-item__value--warn  { color: var(--c-noindex); }
+    .risk-item__value--alert { color: var(--c-danger); }
+    .risk-item__unit {
+      font-size: var(--font-sm);
+      font-weight: 500;
+      color: var(--c-text-3);
+    }
+
+    /* =========================================================
+       블록: checklist (일일 체크리스트)
+       ========================================================= */
+    .checklist {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+    }
+    .checklist__item {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: var(--space-12);
+      align-items: center;
+      padding: var(--space-8) var(--space-12);
+      border-radius: var(--radius-4);
+    }
+    .checklist__item:hover { background: var(--c-surface-2); }
+    .checklist__check {
+      width: 1rem;
+      height: 1rem;
+      border: 0.125rem solid var(--c-border);
+      border-radius: var(--radius-4);
+      display: inline-block;
+      flex: 0 0 auto;
+    }
+    .checklist__item--done .checklist__check {
+      background: var(--c-live);
+      border-color: var(--c-live);
+    }
+    .checklist__label {
+      font-size: var(--font-sm);
+      color: var(--c-text);
+    }
+    .checklist__item--done .checklist__label {
+      color: var(--c-text-3);
+      text-decoration: line-through;
+    }
+    .checklist__hint {
+      font-size: var(--font-sm);
+      color: var(--c-text-3);
+    }
+
+    /* =========================================================
+       블록: entity-stats (엔티티 통계)
+       ========================================================= */
+    .entity-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-12);
+    }
+    .entity-stat {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      padding: var(--space-12) var(--space-16);
+      background: var(--c-surface-2);
+      border: 0.0625rem solid var(--c-border-2);
+      border-radius: var(--radius-4);
+    }
+    .entity-stat__label {
+      font-size: var(--font-sm);
+      color: var(--c-text-2);
+      letter-spacing: 0.05em;
+    }
+    .entity-stat__value {
+      font-size: var(--font-xl);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      font-feature-settings: "tnum";
+    }
+    .entity-stat__sub {
+      font-size: var(--font-sm);
+      color: var(--c-text-3);
+    }
+
+    /* =========================================================
+       블록: utility
+       ========================================================= */
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      border: 0;
+    }
+
+    /* =========================================================
+       반응형 — 좁은 화면에서 단일 컬럼
+       ========================================================= */
+    @media (max-width: 64rem) {
+      .layout { grid-template-columns: 1fr; }
+      .layout__aside { position: static; }
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+      .phase-tracker__steps { grid-template-columns: repeat(2, 1fr); }
+      .topbar { grid-template-columns: 1fr; }
+      .topbar__meta { justify-content: flex-start; flex-wrap: wrap; }
+      .dashboard { padding: var(--space-16); }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="dashboard">
+
+    <!-- ================== TOPBAR ================== -->
+    <header class="topbar">
+      <div class="topbar__brand">
+        <span class="topbar__eyebrow">SEO 운영 대시보드</span>
+        <h1 class="topbar__title">다(多)테마 × 지역 사이트 — 운영 콘솔</h1>
+        <p class="topbar__subtitle">사이트맵은 데이터 모델의 그림자. 페이지가 아닌 5개 엔티티만 만집니다.</p>
+      </div>
+      <div class="topbar__meta">
+        <div class="topbar__meta-item">
+          <span class="topbar__meta-label">오늘</span>
+          <span class="topbar__meta-value">2026.05.06 (수)</span>
+        </div>
+        <span class="topbar__divider" aria-hidden="true"></span>
+        <div class="topbar__meta-item">
+          <span class="topbar__meta-label">현재 진행</span>
+          <span class="topbar__meta-value">Phase 2 · Month 4</span>
+        </div>
+        <span class="topbar__divider" aria-hidden="true"></span>
+        <div class="topbar__meta-item">
+          <span class="topbar__meta-label">담당 운영자</span>
+          <span class="topbar__meta-value">김주원</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ================== PHASE TRACKER ================== -->
+    <section class="phase-tracker" aria-label="Phase 진행 상황">
+      <div class="phase-tracker__header">
+        <h2 class="phase-tracker__title">12개월 로드맵</h2>
+        <p class="phase-tracker__current">
+          현재 <strong>Phase 2 — 시도(17개) 지역 허브</strong> · Month 4 / 12 진행 중
+        </p>
+      </div>
+      <ol class="phase-tracker__steps">
+        <li class="phase-tracker__step phase-tracker__step--done">
+          <span class="phase-tracker__step-label">Phase 0 · Week 1~2</span>
+          <span class="phase-tracker__step-name">데이터 인프라</span>
+          <span class="phase-tracker__step-meta">완료 · 페이지 0 발행</span>
+        </li>
+        <li class="phase-tracker__step phase-tracker__step--done">
+          <span class="phase-tracker__step-label">Phase 1 · Month 1~3</span>
+          <span class="phase-tracker__step-name">깊은 허브 구축</span>
+          <span class="phase-tracker__step-meta">완료 · 허브 28개</span>
+        </li>
+        <li class="phase-tracker__step phase-tracker__step--current">
+          <span class="phase-tracker__step-label">Phase 2 · Month 4~6</span>
+          <span class="phase-tracker__step-name">시도 지역 허브</span>
+          <span class="phase-tracker__step-meta">진행 22 / 51 · 43%</span>
+        </li>
+        <li class="phase-tracker__step">
+          <span class="phase-tracker__step-label">Phase 3 · Month 7~9</span>
+          <span class="phase-tracker__step-name">시군구 확장</span>
+          <span class="phase-tracker__step-meta">예정 · 110~210개</span>
+        </li>
+        <li class="phase-tracker__step">
+          <span class="phase-tracker__step-label">Phase 4 · Month 10~12</span>
+          <span class="phase-tracker__step-name">동/조합 + 정리</span>
+          <span class="phase-tracker__step-meta">예정 · 150~400개</span>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ================== KPI 요약 카드 ================== -->
+    <section class="kpi-grid" aria-label="핵심 KPI">
+
+      <article class="kpi-card">
+        <span class="kpi-card__label">Live 페이지</span>
+        <span class="kpi-card__value">50<span class="kpi-card__unit">개</span></span>
+        <span class="kpi-card__delta kpi-card__delta--up">▲ 6 (지난주 대비)</span>
+        <span class="kpi-card__target">Q2 발행 목표 50~60개 · 진행률 92%</span>
+      </article>
+
+      <article class="kpi-card">
+        <span class="kpi-card__label">일 평균 노출</span>
+        <span class="kpi-card__value">1,820</span>
+        <span class="kpi-card__delta kpi-card__delta--up">▲ 18.4% WoW</span>
+        <span class="kpi-card__target">Q2 목표 1,000~3,000 · 정상 구간</span>
+      </article>
+
+      <article class="kpi-card">
+        <span class="kpi-card__label">일 평균 클릭</span>
+        <span class="kpi-card__value">94</span>
+        <span class="kpi-card__delta kpi-card__delta--up">▲ 12.0% WoW</span>
+        <span class="kpi-card__target">Q3 목표 200~500 진입 준비</span>
+      </article>
+
+      <article class="kpi-card">
+        <span class="kpi-card__label">평균 게재 순위</span>
+        <span class="kpi-card__value">28.4</span>
+        <span class="kpi-card__delta kpi-card__delta--up">▲ 4.2 개선</span>
+        <span class="kpi-card__target">Q2 목표 20~40위 진입</span>
+      </article>
+
+      <article class="kpi-card">
+        <span class="kpi-card__label">인덱스율</span>
+        <span class="kpi-card__value">86<span class="kpi-card__unit">%</span></span>
+        <span class="kpi-card__delta">43 / 50</span>
+        <span class="kpi-card__target">Q2 목표 85% 달성</span>
+      </article>
+
+    </section>
+
+    <!-- ================== MAIN LAYOUT ================== -->
+    <div class="layout">
+
+      <!-- ============ MAIN COLUMN ============ -->
+      <div class="layout__main">
+
+        <!-- 갱신 큐 뷰 -->
+        <section class="panel" aria-labelledby="queue-title">
+          <header class="panel__header">
+            <div class="panel__heading">
+              <h2 class="panel__title" id="queue-title">오늘의 갱신 큐</h2>
+              <p class="panel__subtitle">매일 15~30분. 우선순위 1·2부터 처리합니다.</p>
+            </div>
+            <div class="panel__actions">
+              <span>총 14건</span>
+              <a class="panel__action-link" href="#">큐 전체 보기 →</a>
+            </div>
+          </header>
+
+          <div class="panel__body panel__body--flush">
+            <div class="queue">
+
+              <div class="queue__group">
+                <header class="queue__group-header">
+                  <span class="queue__group-title">우선순위 1 — 90일 미갱신</span>
+                  <span class="queue__group-count">3건</span>
+                </header>
+                <ul class="queue__list">
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p1" aria-label="P1">1</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/tutoring/seoul/gangnam-gu/</span>
+                      <span class="queue-item__reason">마지막 검토 95일 전 · DataPoint 18건 · 노출 1,200/일</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--live"><span class="badge__dot"></span>live</span>
+                      <span>data 18</span>
+                    </div>
+                  </li>
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p1" aria-label="P1">1</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/academy/gyeonggi/anyang-si/</span>
+                      <span class="queue-item__reason">마지막 검토 92일 전 · 학원가 분포 데이터 갱신 필요</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--live"><span class="badge__dot"></span>live</span>
+                      <span>data 11</span>
+                    </div>
+                  </li>
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p1" aria-label="P1">1</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/tutoring/busan/</span>
+                      <span class="queue-item__reason">시도 허브 91일 미갱신 · 자식 시군구 0 (데이터 부족)</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--noindex"><span class="badge__dot"></span>noindex</span>
+                      <span>data 3</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="queue__group">
+                <header class="queue__group-header">
+                  <span class="queue__group-title">우선순위 2 — 새 데이터 유입, 미반영</span>
+                  <span class="queue__group-count">4건</span>
+                </header>
+                <ul class="queue__list">
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p2" aria-label="P2">2</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/tutoring/seoul/seocho-gu/</span>
+                      <span class="queue-item__reason">DataPoint 3건 추가 (qualitative 2 · faq 1) · 검증 대기</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--live"><span class="badge__dot"></span>live</span>
+                      <span>data 14 · +3</span>
+                    </div>
+                  </li>
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p2" aria-label="P2">2</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/tutoring/seoul/songpa-gu/</span>
+                      <span class="queue-item__reason">DataPoint 1건 추가 → 누적 4건 · ●로 승급까지 1건</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--noindex"><span class="badge__dot"></span>noindex</span>
+                      <span>data 4</span>
+                    </div>
+                  </li>
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p2" aria-label="P2">2</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/academy/seoul/gangnam-gu/</span>
+                      <span class="queue-item__reason">comparison 데이터 2건 검증 완료 · 노드 갱신 필요</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--live"><span class="badge__dot"></span>live</span>
+                      <span>data 12 · +2</span>
+                    </div>
+                  </li>
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p2" aria-label="P2">2</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/tutoring/incheon/</span>
+                      <span class="queue-item__reason">매칭 가능 선생님 데이터 12건 자동 수집 · 미검증</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--live"><span class="badge__dot"></span>live</span>
+                      <span>data 9 · +12</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="queue__group">
+                <header class="queue__group-header">
+                  <span class="queue__group-title">우선순위 3 — 노출 급증, 보강 기회</span>
+                  <span class="queue__group-count">3건</span>
+                </header>
+                <ul class="queue__list">
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p3" aria-label="P3">3</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/tutoring/incheon/yeonsu-gu/</span>
+                      <span class="queue-item__reason">지난주 노출 +180% · 평균 게재 18위 · CTR 1.8%</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--live"><span class="badge__dot"></span>live</span>
+                      <span>data 9</span>
+                    </div>
+                  </li>
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p3" aria-label="P3">3</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/tutoring/gyeonggi/gunpo-si/</span>
+                      <span class="queue-item__reason">지난주 노출 +112% · 자체 데이터 발행 후보</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--live"><span class="badge__dot"></span>live</span>
+                      <span>data 8</span>
+                    </div>
+                  </li>
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p3" aria-label="P3">3</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/guides/how-to-choose-tutor/</span>
+                      <span class="queue-item__reason">노출 +88% · AI 인용 시작 · FAQ 보강 권장</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--live"><span class="badge__dot"></span>live</span>
+                      <span>—</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="queue__group">
+                <header class="queue__group-header">
+                  <span class="queue__group-title">우선순위 4 — 약한 페이지, 분기 정리 후보</span>
+                  <span class="queue__group-count">4건</span>
+                </header>
+                <ul class="queue__list">
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p4" aria-label="P4">4</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/tutoring/jeju/seogwipo-si/</span>
+                      <span class="queue-item__reason">90일 트래픽 0 · 통합 또는 삭제 결정 필요</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--noindex"><span class="badge__dot"></span>noindex</span>
+                      <span>data 2</span>
+                    </div>
+                  </li>
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p4" aria-label="P4">4</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/academy/gangwon/</span>
+                      <span class="queue-item__reason">120일 인덱스 안 됨 · 부모 통합 검토</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--noindex"><span class="badge__dot"></span>noindex</span>
+                      <span>data 4</span>
+                    </div>
+                  </li>
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p4" aria-label="P4">4</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/contents/jeonnam/</span>
+                      <span class="queue-item__reason">노출 0 · 클릭 0 · 데이터 누락</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--draft"><span class="badge__dot"></span>draft</span>
+                      <span>data 1</span>
+                    </div>
+                  </li>
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p4" aria-label="P4">4</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/tutoring/sejong/</span>
+                      <span class="queue-item__reason">고아 노드 의심 · 사일로 검사 결과 부모 누락</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--danger"><span class="badge__dot"></span>orphan</span>
+                      <span>data 6</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <footer class="panel__footer">
+            <span>큐는 매일 06:00 KST 자동 재계산 · 마지막 갱신 04:58</span>
+            <a class="panel__action-link" href="#">규칙 보기</a>
+          </footer>
+        </section>
+
+        <!-- 데이터 매트릭스 뷰 -->
+        <section class="panel" aria-labelledby="matrix-title">
+          <header class="panel__header">
+            <div class="panel__heading">
+              <h2 class="panel__title" id="matrix-title">데이터 매트릭스 · Theme × Region</h2>
+              <p class="panel__subtitle">◐ → ● 승급이 가장 효율적인 작업입니다 (검증된 검색 의도 + 데이터만 부족).</p>
+            </div>
+            <div class="panel__actions">
+              <a class="panel__action-link" href="#">전체 매트릭스 →</a>
+            </div>
+          </header>
+
+          <div class="panel__body">
+            <div class="matrix">
+              <table class="matrix__table">
+                <caption class="visually-hidden">테마별 지역별 데이터 충족 현황</caption>
+                <thead>
+                  <tr>
+                    <th class="matrix__corner">지역 \ 테마</th>
+                    <th class="matrix__col-head">과외 (수학)</th>
+                    <th class="matrix__col-head">과외 (영어)</th>
+                    <th class="matrix__col-head">학원</th>
+                    <th class="matrix__col-head">학습 콘텐츠</th>
+                    <th class="matrix__col-head">수업 도구</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th class="matrix__row-head">서울 강남구</th>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">9</span></span></td>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">11</span></span></td>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">12</span></span></td>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">15</span></span></td>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">6</span></span></td>
+                  </tr>
+                  <tr>
+                    <th class="matrix__row-head">서울 서초구</th>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">7</span></span></td>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">8</span></span></td>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">5</span></span></td>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">8</span></span></td>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--noindex">◐<span class="matrix__cell-count">3</span></span></td>
+                  </tr>
+                  <tr>
+                    <th class="matrix__row-head">서울 송파구</th>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">6</span></span></td>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--noindex">◐<span class="matrix__cell-count">4</span></span></td>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--noindex">◐<span class="matrix__cell-count">4</span></span></td>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--noindex">◐<span class="matrix__cell-count">2</span></span></td>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--dead">○<span class="matrix__cell-count">0</span></span></td>
+                  </tr>
+                  <tr>
+                    <th class="matrix__row-head">경기 군포시</th>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">8</span></span></td>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--noindex">◐<span class="matrix__cell-count">3</span></span></td>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--noindex">◐<span class="matrix__cell-count">3</span></span></td>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--dead">○<span class="matrix__cell-count">1</span></span></td>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--dead">○<span class="matrix__cell-count">0</span></span></td>
+                  </tr>
+                  <tr>
+                    <th class="matrix__row-head">경기 안양시</th>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">6</span></span></td>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">5</span></span></td>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">11</span></span></td>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--noindex">◐<span class="matrix__cell-count">2</span></span></td>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--dead">○<span class="matrix__cell-count">0</span></span></td>
+                  </tr>
+                  <tr>
+                    <th class="matrix__row-head">인천 연수구</th>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">9</span></span></td>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--noindex">◐<span class="matrix__cell-count">2</span></span></td>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--noindex">◐<span class="matrix__cell-count">3</span></span></td>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--dead">○<span class="matrix__cell-count">0</span></span></td>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--dead">○<span class="matrix__cell-count">0</span></span></td>
+                  </tr>
+                  <tr>
+                    <th class="matrix__row-head">부산 금정구</th>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--noindex">◐<span class="matrix__cell-count">2</span></span></td>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--dead">○<span class="matrix__cell-count">0</span></span></td>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">5</span></span></td>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--dead">○<span class="matrix__cell-count">0</span></span></td>
+                    <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--dead">○<span class="matrix__cell-count">0</span></span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="matrix__legend" style="margin-top: var(--space-16);">
+              <span class="matrix__legend-item">
+                <span class="matrix__legend-mark matrix__legend-mark--live"></span>
+                <span><strong>●</strong> live · data ≥ 5 · 발행됨</span>
+              </span>
+              <span class="matrix__legend-item">
+                <span class="matrix__legend-mark matrix__legend-mark--noindex"></span>
+                <span><strong>◐</strong> noindex · data 1~4 · 보강 우선순위</span>
+              </span>
+              <span class="matrix__legend-item">
+                <span class="matrix__legend-mark matrix__legend-mark--dead"></span>
+                <span><strong>○</strong> dead · data 0 · 발행 금지</span>
+              </span>
+            </div>
+          </div>
+
+          <footer class="panel__footer">
+            <span>전체 셀: 5 테마 × 17 시도 = 85 · 표시는 발행 대상 7개 시군구</span>
+            <span>● 28 · ◐ 13 · ○ 44</span>
+          </footer>
+        </section>
+
+        <!-- KPI 히트맵 뷰 -->
+        <section class="panel" aria-labelledby="heatmap-title">
+          <header class="panel__header">
+            <div class="panel__heading">
+              <h2 class="panel__title" id="heatmap-title">KPI 히트맵 — Search Console 연동</h2>
+              <p class="panel__subtitle">분기 정리 회의 자료. 살릴지 / 통합할지 / 삭제할지 결정합니다.</p>
+            </div>
+            <div class="panel__actions">
+              <span>2026-04-29 ~ 05-05 · 7일</span>
+            </div>
+          </header>
+
+          <div class="panel__body panel__body--flush">
+            <table class="heatmap">
+              <thead class="heatmap__head">
+                <tr>
+                  <th>노드</th>
+                  <th>인덱스</th>
+                  <th>노출</th>
+                  <th>클릭</th>
+                  <th>평균 순위</th>
+                  <th>CTR</th>
+                  <th class="heatmap__cell--judge">판단</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="heatmap__cell">/tutoring/</td>
+                  <td class="heatmap__cell">✓</td>
+                  <td class="heatmap__cell"><span class="heatmap__cell-bar" style="width: 6rem"></span>8,200</td>
+                  <td class="heatmap__cell">320</td>
+                  <td class="heatmap__cell">11.2</td>
+                  <td class="heatmap__cell">3.9%</td>
+                  <td class="heatmap__cell heatmap__cell--judge"><span class="heatmap__judge heatmap__judge--ok">✓ 정상</span></td>
+                </tr>
+                <tr>
+                  <td class="heatmap__cell">/tutoring/seoul/</td>
+                  <td class="heatmap__cell">✓</td>
+                  <td class="heatmap__cell"><span class="heatmap__cell-bar" style="width: 4rem"></span>3,400</td>
+                  <td class="heatmap__cell">145</td>
+                  <td class="heatmap__cell">14.8</td>
+                  <td class="heatmap__cell">4.3%</td>
+                  <td class="heatmap__cell heatmap__cell--judge"><span class="heatmap__judge heatmap__judge--ok">✓ 정상</span></td>
+                </tr>
+                <tr>
+                  <td class="heatmap__cell">/tutoring/seoul/gangnam-gu/</td>
+                  <td class="heatmap__cell">✓</td>
+                  <td class="heatmap__cell"><span class="heatmap__cell-bar" style="width: 2.5rem"></span>1,200</td>
+                  <td class="heatmap__cell">62</td>
+                  <td class="heatmap__cell">18.3</td>
+                  <td class="heatmap__cell">5.2%</td>
+                  <td class="heatmap__cell heatmap__cell--judge"><span class="heatmap__judge heatmap__judge--ok">✓ 정상</span></td>
+                </tr>
+                <tr>
+                  <td class="heatmap__cell">/academy/</td>
+                  <td class="heatmap__cell">✓</td>
+                  <td class="heatmap__cell"><span class="heatmap__cell-bar" style="width: 3.5rem"></span>2,100</td>
+                  <td class="heatmap__cell">89</td>
+                  <td class="heatmap__cell">16.7</td>
+                  <td class="heatmap__cell">4.2%</td>
+                  <td class="heatmap__cell heatmap__cell--judge"><span class="heatmap__judge heatmap__judge--ok">✓ 정상</span></td>
+                </tr>
+                <tr>
+                  <td class="heatmap__cell">/tutoring/incheon/yeonsu-gu/</td>
+                  <td class="heatmap__cell">✓</td>
+                  <td class="heatmap__cell"><span class="heatmap__cell-bar heatmap__cell-bar--mid" style="width: 1.5rem"></span>720</td>
+                  <td class="heatmap__cell">14</td>
+                  <td class="heatmap__cell">22.6</td>
+                  <td class="heatmap__cell">1.9%</td>
+                  <td class="heatmap__cell heatmap__cell--judge"><span class="heatmap__judge heatmap__judge--warn">◐ 메타 재작성</span></td>
+                </tr>
+                <tr>
+                  <td class="heatmap__cell">/tutoring/seoul/seocho-gu/yeoksam-dong/</td>
+                  <td class="heatmap__cell">✓</td>
+                  <td class="heatmap__cell"><span class="heatmap__cell-bar heatmap__cell-bar--mid" style="width: 1rem"></span>380</td>
+                  <td class="heatmap__cell">23</td>
+                  <td class="heatmap__cell">24.5</td>
+                  <td class="heatmap__cell">6.1%</td>
+                  <td class="heatmap__cell heatmap__cell--judge"><span class="heatmap__judge heatmap__judge--warn">◐ 보강 필요</span></td>
+                </tr>
+                <tr>
+                  <td class="heatmap__cell">/tutoring/seoul/gangnam-gu/daechi-dong/</td>
+                  <td class="heatmap__cell">✗</td>
+                  <td class="heatmap__cell"><span class="heatmap__cell-bar heatmap__cell-bar--low" style="width: 0.5rem"></span>15</td>
+                  <td class="heatmap__cell">0</td>
+                  <td class="heatmap__cell">62.1</td>
+                  <td class="heatmap__cell">0.0%</td>
+                  <td class="heatmap__cell heatmap__cell--judge"><span class="heatmap__judge heatmap__judge--alert">✗ 통합 검토</span></td>
+                </tr>
+                <tr>
+                  <td class="heatmap__cell">/tutoring/jeju/seogwipo-si/</td>
+                  <td class="heatmap__cell">✗</td>
+                  <td class="heatmap__cell"><span class="heatmap__cell-bar heatmap__cell-bar--low" style="width: 0.25rem"></span>0</td>
+                  <td class="heatmap__cell">0</td>
+                  <td class="heatmap__cell">—</td>
+                  <td class="heatmap__cell">—</td>
+                  <td class="heatmap__cell heatmap__cell--judge"><span class="heatmap__judge heatmap__judge--alert">✗ 삭제 후보</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <footer class="panel__footer">
+            <span>마지막 동기화 04:58 · 다음 동기화 06:00</span>
+            <a class="panel__action-link" href="#">전체 50개 노드 보기 →</a>
+          </footer>
+        </section>
+
+        <!-- 발행 트리 뷰 -->
+        <section class="panel" aria-labelledby="tree-title">
+          <header class="panel__header">
+            <div class="panel__heading">
+              <h2 class="panel__title" id="tree-title">발행 트리 — sitemap.xml 원천</h2>
+              <p class="panel__subtitle">사용자와 검색엔진이 보는 구조. content_node 테이블에서 결정론적으로 도출됩니다.</p>
+            </div>
+            <div class="panel__actions">
+              <a class="panel__action-link" href="#">sitemap.xml ↗</a>
+            </div>
+          </header>
+
+          <div class="panel__body">
+            <ul class="tree">
+              <li>
+                <div class="tree-node">
+                  <span class="tree-node__icon">▾</span>
+                  <span class="tree-node__url tree-node__url--hub">/</span>
+                  <span class="tree-node__meta"><span class="badge badge--ink">루트</span></span>
+                </div>
+
+                <ul class="tree__list tree__list--nested">
+                  <li>
+                    <div class="tree-node">
+                      <span class="tree-node__icon">▾</span>
+                      <span class="tree-node__url tree-node__url--hub">/tutoring/</span>
+                      <span class="tree-node__meta">
+                        <span class="badge badge--live"><span class="badge__dot"></span>HUB · live</span>
+                        <span class="tree-node__data">depth 0</span>
+                      </span>
+                    </div>
+
+                    <ul class="tree__list tree__list--nested">
+                      <li>
+                        <div class="tree-node">
+                          <span class="tree-node__icon">▾</span>
+                          <span class="tree-node__url">/tutoring/seoul/</span>
+                          <span class="tree-node__meta">
+                            <span class="badge badge--live"><span class="badge__dot"></span>SIDO · live</span>
+                            <span class="tree-node__data tree-node__data--ok">data 42</span>
+                          </span>
+                        </div>
+
+                        <ul class="tree__list tree__list--nested">
+                          <li>
+                            <div class="tree-node">
+                              <span class="tree-node__icon">▸</span>
+                              <span class="tree-node__url">/tutoring/seoul/gangnam-gu/</span>
+                              <span class="tree-node__meta">
+                                <span class="badge badge--live"><span class="badge__dot"></span>GU · live</span>
+                                <span class="tree-node__data tree-node__data--ok">data 18</span>
+                              </span>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="tree-node">
+                              <span class="tree-node__icon">▸</span>
+                              <span class="tree-node__url">/tutoring/seoul/seocho-gu/</span>
+                              <span class="tree-node__meta">
+                                <span class="badge badge--live"><span class="badge__dot"></span>GU · live</span>
+                                <span class="tree-node__data tree-node__data--ok">data 14</span>
+                              </span>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="tree-node">
+                              <span class="tree-node__icon">▸</span>
+                              <span class="tree-node__url">/tutoring/seoul/songpa-gu/</span>
+                              <span class="tree-node__meta">
+                                <span class="badge badge--noindex"><span class="badge__dot"></span>GU · noindex</span>
+                                <span class="tree-node__data tree-node__data--low">data 4</span>
+                              </span>
+                            </div>
+                          </li>
+                        </ul>
+                      </li>
+
+                      <li>
+                        <div class="tree-node">
+                          <span class="tree-node__icon">▸</span>
+                          <span class="tree-node__url">/tutoring/gyeonggi/</span>
+                          <span class="tree-node__meta">
+                            <span class="badge badge--live"><span class="badge__dot"></span>SIDO · live</span>
+                            <span class="tree-node__data tree-node__data--ok">data 24</span>
+                          </span>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="tree-node">
+                          <span class="tree-node__icon">▸</span>
+                          <span class="tree-node__url">/tutoring/incheon/</span>
+                          <span class="tree-node__meta">
+                            <span class="badge badge--live"><span class="badge__dot"></span>SIDO · live</span>
+                            <span class="tree-node__data tree-node__data--ok">data 9</span>
+                          </span>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="tree-node">
+                          <span class="tree-node__icon">▸</span>
+                          <span class="tree-node__url">/tutoring/busan/</span>
+                          <span class="tree-node__meta">
+                            <span class="badge badge--noindex"><span class="badge__dot"></span>SIDO · noindex</span>
+                            <span class="tree-node__data tree-node__data--low">data 3</span>
+                          </span>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li>
+                    <div class="tree-node">
+                      <span class="tree-node__icon">▸</span>
+                      <span class="tree-node__url tree-node__url--hub">/academy/</span>
+                      <span class="tree-node__meta">
+                        <span class="badge badge--live"><span class="badge__dot"></span>HUB · live</span>
+                        <span class="tree-node__data">자식 14</span>
+                      </span>
+                    </div>
+                  </li>
+
+                  <li>
+                    <div class="tree-node">
+                      <span class="tree-node__icon">▸</span>
+                      <span class="tree-node__url tree-node__url--hub">/contents/</span>
+                      <span class="tree-node__meta">
+                        <span class="badge badge--live"><span class="badge__dot"></span>HUB · live</span>
+                        <span class="tree-node__data">자식 8</span>
+                      </span>
+                    </div>
+                  </li>
+
+                  <li>
+                    <div class="tree-node">
+                      <span class="tree-node__icon">▸</span>
+                      <span class="tree-node__url tree-node__url--hub">/guides/</span>
+                      <span class="tree-node__meta">
+                        <span class="badge badge--live"><span class="badge__dot"></span>INFO · live</span>
+                        <span class="tree-node__data">정보형 22</span>
+                      </span>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+
+          <footer class="panel__footer">
+            <span>최대 깊이 4 / 5 · sitemap.xml 노드 50개</span>
+            <span>마지막 빌드 04:58 · 다음 cron 06:00</span>
+          </footer>
+        </section>
+
+      </div><!-- /.layout__main -->
+
+      <!-- ============ ASIDE COLUMN ============ -->
+      <aside class="layout__aside">
+
+        <!-- 엔티티 통계 -->
+        <section class="panel" aria-labelledby="entity-title">
+          <header class="panel__header">
+            <div class="panel__heading">
+              <h2 class="panel__title" id="entity-title">5개 엔티티 현황</h2>
+              <p class="panel__subtitle">운영자가 만지는 것은 데이터뿐.</p>
+            </div>
+          </header>
+          <div class="panel__body">
+            <div class="entity-stats">
+              <div class="entity-stat">
+                <span class="entity-stat__label">THEME</span>
+                <span class="entity-stat__value">5</span>
+                <span class="entity-stat__sub">depth ≤ 2</span>
+              </div>
+              <div class="entity-stat">
+                <span class="entity-stat__label">REGION</span>
+                <span class="entity-stat__value">3,745</span>
+                <span class="entity-stat__sub">17 / 228 / 3,500</span>
+              </div>
+              <div class="entity-stat">
+                <span class="entity-stat__label">AUTHOR</span>
+                <span class="entity-stat__value">4</span>
+                <span class="entity-stat__sub">검증 완료 4</span>
+              </div>
+              <div class="entity-stat">
+                <span class="entity-stat__label">CONTENT_NODE</span>
+                <span class="entity-stat__value">112</span>
+                <span class="entity-stat__sub">live 50 · noindex 38 · draft 24</span>
+              </div>
+              <div class="entity-stat" style="grid-column: span 2;">
+                <span class="entity-stat__label">DATA_POINT</span>
+                <span class="entity-stat__value">486</span>
+                <span class="entity-stat__sub">검증 412 · 미검증 74 · 평균 4.3 / 노드</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 일일 체크리스트 -->
+        <section class="panel" aria-labelledby="checklist-title">
+          <header class="panel__header">
+            <div class="panel__heading">
+              <h2 class="panel__title" id="checklist-title">오늘의 체크리스트</h2>
+              <p class="panel__subtitle">매일 출근 후 15~30분.</p>
+            </div>
+            <div class="panel__actions">
+              <span>2 / 5</span>
+            </div>
+          </header>
+          <div class="panel__body">
+            <ul class="checklist">
+              <li class="checklist__item checklist__item--done">
+                <span class="checklist__check" aria-hidden="true"></span>
+                <span class="checklist__label">갱신 큐 P1·P2 처리</span>
+                <span class="checklist__hint">7건</span>
+              </li>
+              <li class="checklist__item checklist__item--done">
+                <span class="checklist__check" aria-hidden="true"></span>
+                <span class="checklist__label">어제 추가 DataPoint 검증</span>
+                <span class="checklist__hint">11건</span>
+              </li>
+              <li class="checklist__item">
+                <span class="checklist__check" aria-hidden="true"></span>
+                <span class="checklist__label">매트릭스 ◐ 셀 1개를 ●로 승급</span>
+                <span class="checklist__hint">권장 송파</span>
+              </li>
+              <li class="checklist__item">
+                <span class="checklist__check" aria-hidden="true"></span>
+                <span class="checklist__label">Search Console 알림 점검</span>
+                <span class="checklist__hint">2건</span>
+              </li>
+              <li class="checklist__item">
+                <span class="checklist__check" aria-hidden="true"></span>
+                <span class="checklist__label">사일로 무결성 위반 처리</span>
+                <span class="checklist__hint">3건</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 사일로 무결성 알림 -->
+        <section class="panel" aria-labelledby="silo-title">
+          <header class="panel__header">
+            <div class="panel__heading">
+              <h2 class="panel__title" id="silo-title">사일로 무결성 알림</h2>
+              <p class="panel__subtitle">매주 자동 검사. 위반 즉시 알림.</p>
+            </div>
+            <div class="panel__actions">
+              <span>3건</span>
+            </div>
+          </header>
+          <div class="panel__body">
+            <div class="silo__list">
+              <div class="silo-alert silo-alert--danger">
+                <span class="silo-alert__icon" aria-hidden="true">!</span>
+                <div class="silo-alert__body">
+                  <span class="silo-alert__title">고아 노드 — 부모 누락</span>
+                  <span class="silo-alert__detail">시도 트리에 부모가 없습니다. theme tree 위반.</span>
+                  <span class="silo-alert__url">/tutoring/sejong/</span>
+                </div>
+              </div>
+              <div class="silo-alert silo-alert--warn">
+                <span class="silo-alert__icon" aria-hidden="true">⚠</span>
+                <div class="silo-alert__body">
+                  <span class="silo-alert__title">사일로 침범 — 외부 테마로 직접 링크</span>
+                  <span class="silo-alert__detail">/tutoring/.../gangnam-gu/ 본문에서 /academy/seoul/gangnam-gu/로 링크.</span>
+                  <span class="silo-alert__url">tutoring → academy 1건</span>
+                </div>
+              </div>
+              <div class="silo-alert silo-alert--warn">
+                <span class="silo-alert__icon" aria-hidden="true">⚠</span>
+                <div class="silo-alert__body">
+                  <span class="silo-alert__title">자식 미등록 — 부모의 자식 목록에 누락</span>
+                  <span class="silo-alert__detail">자동 등록 또는 자식의 부모 ID 재확인이 필요합니다.</span>
+                  <span class="silo-alert__url">/tutoring/seoul/seocho-gu/banpo-dong/</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="panel__footer">
+            <span>마지막 검사 2026-05-05 23:00</span>
+            <a class="panel__action-link" href="#">규칙 6개 보기</a>
+          </footer>
+        </section>
+
+        <!-- 위험 지표 -->
+        <section class="panel" aria-labelledby="risk-title">
+          <header class="panel__header">
+            <div class="panel__heading">
+              <h2 class="panel__title" id="risk-title">위험 지표</h2>
+              <p class="panel__subtitle">분기별 점검 — 임계값 초과 시 즉시 대응.</p>
+            </div>
+          </header>
+          <div class="panel__body">
+            <ul class="risk-list">
+              <li class="risk-item">
+                <div class="risk-item__label">
+                  <span class="risk-item__name">미인덱스 페이지 비율</span>
+                  <span class="risk-item__threshold">임계 30% 이상</span>
+                </div>
+                <span class="risk-item__value risk-item__value--ok">14<span class="risk-item__unit">%</span></span>
+              </li>
+              <li class="risk-item">
+                <div class="risk-item__label">
+                  <span class="risk-item__name">Soft 404 / 중복 콘텐츠</span>
+                  <span class="risk-item__threshold">임계 10건 이상</span>
+                </div>
+                <span class="risk-item__value risk-item__value--ok">2<span class="risk-item__unit">건</span></span>
+              </li>
+              <li class="risk-item">
+                <div class="risk-item__label">
+                  <span class="risk-item__name">평균 클릭률 (CTR)</span>
+                  <span class="risk-item__threshold">임계 1% 미만</span>
+                </div>
+                <span class="risk-item__value risk-item__value--ok">3.8<span class="risk-item__unit">%</span></span>
+              </li>
+              <li class="risk-item">
+                <div class="risk-item__label">
+                  <span class="risk-item__name">Core Web Vitals "Poor"</span>
+                  <span class="risk-item__threshold">임계 25% 이상</span>
+                </div>
+                <span class="risk-item__value risk-item__value--warn">18<span class="risk-item__unit">%</span></span>
+              </li>
+              <li class="risk-item">
+                <div class="risk-item__label">
+                  <span class="risk-item__name">90일 트래픽 0 페이지</span>
+                  <span class="risk-item__threshold">분기 정리 대상</span>
+                </div>
+                <span class="risk-item__value risk-item__value--warn">6<span class="risk-item__unit">개</span></span>
+              </li>
+              <li class="risk-item">
+                <div class="risk-item__label">
+                  <span class="risk-item__name">발행 게이트 우회 시도</span>
+                  <span class="risk-item__threshold">DB 트리거에서 거부</span>
+                </div>
+                <span class="risk-item__value risk-item__value--ok">0</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+      </aside><!-- /.layout__aside -->
+    </div><!-- /.layout -->
+
+  </main>
+
+</body>
+</html>
