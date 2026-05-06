@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Asta+Sans:wght@300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
@@ -24,30 +25,30 @@
           <div class="sidebar__nav-group">
             <span class="sidebar__nav-group-label">전체</span>
             <ul class="sidebar__nav-list">
-              <li><a class="sidebar__nav-link" href="./index.html">개요</a></li>
+              <li><a class="sidebar__nav-link" href="./index.html"><i class="fa-solid fa-house sidebar__nav-icon"></i><span class="sidebar__nav-label">개요</span></a></li>
             </ul>
           </div>
           <div class="sidebar__nav-group">
             <span class="sidebar__nav-group-label">사이트맵 5개 뷰</span>
             <ul class="sidebar__nav-list">
-              <li><a class="sidebar__nav-link" href="./tree.html">발행 트리<span class="sidebar__nav-count">50</span></a></li>
-              <li><a class="sidebar__nav-link" href="./matrix.html">데이터 매트릭스<span class="sidebar__nav-count">85</span></a></li>
-              <li><a class="sidebar__nav-link" href="./heatmap.html">KPI 히트맵</a></li>
-              <li><a class="sidebar__nav-link" href="./silo.html">사일로 무결성<span class="sidebar__nav-count sidebar__nav-count--alert">3</span></a></li>
-              <li><a class="sidebar__nav-link" href="./queue.html">갱신 큐<span class="sidebar__nav-count">14</span></a></li>
+              <li><a class="sidebar__nav-link" href="./tree.html"><i class="fa-solid fa-sitemap sidebar__nav-icon"></i><span class="sidebar__nav-label">발행 트리</span><span class="sidebar__nav-count">50</span></a></li>
+              <li><a class="sidebar__nav-link" href="./matrix.html"><i class="fa-solid fa-table-cells sidebar__nav-icon"></i><span class="sidebar__nav-label">데이터 매트릭스</span><span class="sidebar__nav-count">85</span></a></li>
+              <li><a class="sidebar__nav-link" href="./heatmap.html"><i class="fa-solid fa-chart-line sidebar__nav-icon"></i><span class="sidebar__nav-label">KPI 히트맵</span></a></li>
+              <li><a class="sidebar__nav-link" href="./silo.html"><i class="fa-solid fa-shield-halved sidebar__nav-icon"></i><span class="sidebar__nav-label">사일로 무결성</span><span class="sidebar__nav-count sidebar__nav-count--alert">3</span></a></li>
+              <li><a class="sidebar__nav-link" href="./queue.html"><i class="fa-solid fa-list-check sidebar__nav-icon"></i><span class="sidebar__nav-label">갱신 큐</span><span class="sidebar__nav-count">14</span></a></li>
             </ul>
           </div>
           <div class="sidebar__nav-group">
             <span class="sidebar__nav-group-label">엔티티 관리</span>
             <ul class="sidebar__nav-list">
-              <li><a class="sidebar__nav-link" href="./node-new.html">신규 노드</a></li>
-              <li><a class="sidebar__nav-link" href="./authors.html">작성자<span class="sidebar__nav-count">4</span></a></li>
+              <li><a class="sidebar__nav-link" href="./node-new.html"><i class="fa-solid fa-circle-plus sidebar__nav-icon"></i><span class="sidebar__nav-label">신규 노드</span></a></li>
+              <li><a class="sidebar__nav-link" href="./authors.html"><i class="fa-solid fa-user-pen sidebar__nav-icon"></i><span class="sidebar__nav-label">작성자</span><span class="sidebar__nav-count">4</span></a></li>
             </ul>
           </div>
           <div class="sidebar__nav-group">
             <span class="sidebar__nav-group-label">점검</span>
             <ul class="sidebar__nav-list">
-              <li><a class="sidebar__nav-link sidebar__nav-link--active" href="./risk.html">위험 지표</a></li>
+              <li><a class="sidebar__nav-link sidebar__nav-link--active" href="./risk.html"><i class="fa-solid fa-triangle-exclamation sidebar__nav-icon"></i><span class="sidebar__nav-label">위험 지표</span></a></li>
             </ul>
           </div>
         </nav>
@@ -73,7 +74,7 @@
           <div class="page-header__heading">
             <span class="page-header__eyebrow">점검 · Risk Indicators</span>
             <h2 class="page-header__title">위험 지표 — 분기 점검</h2>
-            <p class="page-header__subtitle">임계값 초과 시 즉시 대응. 약한 페이지가 도메인 권위를 깎습니다 — 방치는 선택지가 아닙니다.</p>
+            <p class="page-header__subtitle">임계값 초과 시 즉시 대응. 분기 단위로 점검합니다.</p>
           </div>
           <div class="page-header__meta">
             <div class="page-header__meta-item">
@@ -149,51 +150,6 @@
                       <span class="risk-item__threshold">DB 트리거에서 거부됨</span>
                     </div>
                     <span class="risk-item__value risk-item__value--ok">0</span>
-                  </li>
-                </ul>
-              </div>
-            </section>
-
-            <section class="panel" aria-labelledby="trap-title">
-              <header class="panel__header">
-                <div class="panel__heading">
-                  <h3 class="panel__title" id="trap-title">12개월 4가지 함정</h3>
-                  <p class="panel__subtitle">12개월 전략 보고서가 반복 강조하는 위험 시나리오.</p>
-                </div>
-              </header>
-              <div class="panel__body">
-                <ul class="rules">
-                  <li class="rules__item">
-                    <span class="rules__index">01</span>
-                    <div class="rules__body">
-                      <span class="rules__title">Month 2~3 충동 — AI 대량 생성</span>
-                      <span class="rules__detail">"동 페이지 3,500개를 한 번에 만들자" → 2026년 3월 업데이트로 60~90% 순위 하락한 사이트들의 패턴.</span>
-                    </div>
-                    <span class="rules__status">통과</span>
-                  </li>
-                  <li class="rules__item">
-                    <span class="rules__index">02</span>
-                    <div class="rules__body">
-                      <span class="rules__title">키워드 카니발리제이션</span>
-                      <span class="rules__detail">시도/시군구 페이지가 같은 머리어 경쟁. 분기별 키워드 매핑 점검 필요.</span>
-                    </div>
-                    <span class="rules__status">감시 중</span>
-                  </li>
-                  <li class="rules__item">
-                    <span class="rules__index">03</span>
-                    <div class="rules__body">
-                      <span class="rules__title">약한 페이지 누적</span>
-                      <span class="rules__detail">트래픽 0 페이지가 30% 넘으면 도메인 권위 하락. 분기별 강제 정리.</span>
-                    </div>
-                    <span class="rules__status">분기 정리</span>
-                  </li>
-                  <li class="rules__item">
-                    <span class="rules__index">04</span>
-                    <div class="rules__body">
-                      <span class="rules__title">테마 분산</span>
-                      <span class="rules__detail">너무 많은 테마. Phase 0에서 3~5개로 제한, 깊어진 후에만 추가.</span>
-                    </div>
-                    <span class="rules__status">5개 유지</span>
                   </li>
                 </ul>
               </div>

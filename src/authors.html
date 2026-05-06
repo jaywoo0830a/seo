@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Asta+Sans:wght@300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
@@ -24,30 +25,30 @@
           <div class="sidebar__nav-group">
             <span class="sidebar__nav-group-label">전체</span>
             <ul class="sidebar__nav-list">
-              <li><a class="sidebar__nav-link" href="./index.html">개요</a></li>
+              <li><a class="sidebar__nav-link" href="./index.html"><i class="fa-solid fa-house sidebar__nav-icon"></i><span class="sidebar__nav-label">개요</span></a></li>
             </ul>
           </div>
           <div class="sidebar__nav-group">
             <span class="sidebar__nav-group-label">사이트맵 5개 뷰</span>
             <ul class="sidebar__nav-list">
-              <li><a class="sidebar__nav-link" href="./tree.html">발행 트리<span class="sidebar__nav-count">50</span></a></li>
-              <li><a class="sidebar__nav-link" href="./matrix.html">데이터 매트릭스<span class="sidebar__nav-count">85</span></a></li>
-              <li><a class="sidebar__nav-link" href="./heatmap.html">KPI 히트맵</a></li>
-              <li><a class="sidebar__nav-link" href="./silo.html">사일로 무결성<span class="sidebar__nav-count sidebar__nav-count--alert">3</span></a></li>
-              <li><a class="sidebar__nav-link" href="./queue.html">갱신 큐<span class="sidebar__nav-count">14</span></a></li>
+              <li><a class="sidebar__nav-link" href="./tree.html"><i class="fa-solid fa-sitemap sidebar__nav-icon"></i><span class="sidebar__nav-label">발행 트리</span><span class="sidebar__nav-count">50</span></a></li>
+              <li><a class="sidebar__nav-link" href="./matrix.html"><i class="fa-solid fa-table-cells sidebar__nav-icon"></i><span class="sidebar__nav-label">데이터 매트릭스</span><span class="sidebar__nav-count">85</span></a></li>
+              <li><a class="sidebar__nav-link" href="./heatmap.html"><i class="fa-solid fa-chart-line sidebar__nav-icon"></i><span class="sidebar__nav-label">KPI 히트맵</span></a></li>
+              <li><a class="sidebar__nav-link" href="./silo.html"><i class="fa-solid fa-shield-halved sidebar__nav-icon"></i><span class="sidebar__nav-label">사일로 무결성</span><span class="sidebar__nav-count sidebar__nav-count--alert">3</span></a></li>
+              <li><a class="sidebar__nav-link" href="./queue.html"><i class="fa-solid fa-list-check sidebar__nav-icon"></i><span class="sidebar__nav-label">갱신 큐</span><span class="sidebar__nav-count">14</span></a></li>
             </ul>
           </div>
           <div class="sidebar__nav-group">
             <span class="sidebar__nav-group-label">엔티티 관리</span>
             <ul class="sidebar__nav-list">
-              <li><a class="sidebar__nav-link" href="./node-new.html">신규 노드</a></li>
-              <li><a class="sidebar__nav-link sidebar__nav-link--active" href="./authors.html">작성자<span class="sidebar__nav-count">4</span></a></li>
+              <li><a class="sidebar__nav-link" href="./node-new.html"><i class="fa-solid fa-circle-plus sidebar__nav-icon"></i><span class="sidebar__nav-label">신규 노드</span></a></li>
+              <li><a class="sidebar__nav-link sidebar__nav-link--active" href="./authors.html"><i class="fa-solid fa-user-pen sidebar__nav-icon"></i><span class="sidebar__nav-label">작성자</span><span class="sidebar__nav-count">4</span></a></li>
             </ul>
           </div>
           <div class="sidebar__nav-group">
             <span class="sidebar__nav-group-label">점검</span>
             <ul class="sidebar__nav-list">
-              <li><a class="sidebar__nav-link" href="./risk.html">위험 지표</a></li>
+              <li><a class="sidebar__nav-link" href="./risk.html"><i class="fa-solid fa-triangle-exclamation sidebar__nav-icon"></i><span class="sidebar__nav-label">위험 지표</span></a></li>
             </ul>
           </div>
         </nav>
@@ -73,7 +74,7 @@
           <div class="page-header__heading">
             <span class="page-header__eyebrow">엔티티 관리 · Author</span>
             <h2 class="page-header__title">작성자 관리</h2>
-            <p class="page-header__subtitle">E-E-A-T 신호의 원천. 모든 작성자는 실명 기반이며, verified 상태에서만 노드에 배정될 수 있습니다.</p>
+            <p class="page-header__subtitle">실명 기반. verified 상태에서만 노드에 배정 가능.</p>
           </div>
           <div class="page-header__meta">
             <div class="page-header__meta-item">
@@ -246,47 +247,6 @@
           </div>
 
           <aside class="page-grid__aside">
-
-            <section class="panel" aria-labelledby="eeat-title">
-              <header class="panel__header">
-                <div class="panel__heading">
-                  <h3 class="panel__title" id="eeat-title">E-E-A-T 신호</h3>
-                  <p class="panel__subtitle">왜 실명·credentials가 의무인가.</p>
-                </div>
-              </header>
-              <div class="panel__body">
-                <ul class="rules">
-                  <li class="rules__item">
-                    <span class="rules__index">E</span>
-                    <div class="rules__body">
-                      <span class="rules__title">Experience · 경험</span>
-                      <span class="rules__detail">실제 분야 종사 이력 — bio에 구체적으로</span>
-                    </div>
-                  </li>
-                  <li class="rules__item">
-                    <span class="rules__index">E</span>
-                    <div class="rules__body">
-                      <span class="rules__title">Expertise · 전문성</span>
-                      <span class="rules__detail">credentials 컬럼이 정확히 이 신호</span>
-                    </div>
-                  </li>
-                  <li class="rules__item">
-                    <span class="rules__index">A</span>
-                    <div class="rules__body">
-                      <span class="rules__title">Authoritativeness · 권위</span>
-                      <span class="rules__detail">담당 노드의 트래픽·외부 인용으로 누적</span>
-                    </div>
-                  </li>
-                  <li class="rules__item">
-                    <span class="rules__index">T</span>
-                    <div class="rules__body">
-                      <span class="rules__title">Trust · 신뢰</span>
-                      <span class="rules__detail">verified_at + 실명 표시 + 갱신일 명시</span>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </section>
 
             <section class="panel" aria-labelledby="rules-title">
               <header class="panel__header">

@@ -161,10 +161,9 @@ a:hover { text-decoration: underline; }
   gap: var(--space-2);
 }
 .sidebar__nav-link {
-  display: grid;
-  grid-template-columns: 1fr auto;
+  display: flex;
   align-items: center;
-  gap: var(--space-8);
+  gap: var(--space-12);
   padding: var(--space-8) var(--space-12);
   border-radius: var(--radius-4);
   font-size: var(--font-md);
@@ -185,6 +184,17 @@ a:hover { text-decoration: underline; }
   background: var(--c-ink);
   color: var(--c-surface);
 }
+.sidebar__nav-icon {
+  width: 0.875rem;
+  font-size: 0.75rem;
+  text-align: center;
+  color: var(--c-text-3);
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+.sidebar__nav-link:hover .sidebar__nav-icon { color: var(--c-text); }
+.sidebar__nav-link--active .sidebar__nav-icon { color: var(--c-surface); }
+.sidebar__nav-label { flex: 1; min-width: 0; }
 .sidebar__nav-count {
   font-size: var(--font-sm);
   font-weight: 500;
@@ -279,7 +289,7 @@ a:hover { text-decoration: underline; }
   color: var(--c-text-3);
 }
 .page-header__title {
-  font-size: var(--font-2xl);
+  font-size: var(--font-xl);
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: var(--line-tight);
@@ -439,7 +449,7 @@ a:hover { text-decoration: underline; }
   font-weight: 500;
 }
 .kpi-card__value {
-  font-size: var(--font-2xl);
+  font-size: var(--font-xl);
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: var(--line-tight);
@@ -491,9 +501,9 @@ a:hover { text-decoration: underline; }
   gap: var(--space-4);
 }
 .panel__title {
-  font-size: var(--font-lg);
+  font-size: var(--font-md);
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
 }
 .panel__subtitle {
   font-size: var(--font-sm);
@@ -954,7 +964,7 @@ a:hover { text-decoration: underline; }
   letter-spacing: 0.05em;
 }
 .entity-stat__value {
-  font-size: var(--font-xl);
+  font-size: var(--font-lg);
   font-weight: 700;
   letter-spacing: -0.02em;
   font-feature-settings: "tnum";
@@ -1437,6 +1447,189 @@ a:hover { text-decoration: underline; }
 }
 
 /* =========================================================
+   블록: workflow — 하루 작업 흐름
+   ========================================================= */
+.workflow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+.workflow__intro {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  padding: var(--space-12) var(--space-16);
+  background: var(--c-ink);
+  color: var(--c-surface);
+  border-radius: var(--radius-8);
+  font-size: var(--font-md);
+  font-weight: 500;
+}
+.workflow__intro-icon {
+  font-size: var(--font-md);
+  color: var(--c-surface);
+}
+.workflow__step {
+  background: var(--c-surface);
+  border: 0.0625rem solid var(--c-border);
+  border-radius: var(--radius-8);
+  box-shadow: var(--shadow-1);
+  overflow: hidden;
+}
+.workflow__step--optional { background: var(--c-surface-2); }
+.workflow__step-header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--space-16);
+  align-items: center;
+  padding: var(--space-24);
+}
+.workflow__step-number {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: var(--c-ink);
+  color: var(--c-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-sm);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.workflow__step--optional .workflow__step-number {
+  background: var(--c-dead-bg);
+  color: var(--c-text-2);
+}
+.workflow__step-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+}
+.workflow__step-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  font-size: var(--font-md);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  line-height: var(--line-snug);
+}
+.workflow__step-title-icon {
+  color: var(--c-text-3);
+  font-size: 0.75rem;
+  opacity: 0.85;
+}
+.workflow__step-subtitle {
+  font-size: var(--font-sm);
+  color: var(--c-text-2);
+  line-height: var(--line-snug);
+}
+.workflow__step-count {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-12);
+  background: var(--c-surface-3);
+  border-radius: 1rem;
+  font-size: var(--font-sm);
+  color: var(--c-text-2);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.workflow__step-count strong {
+  font-size: var(--font-md);
+  font-weight: 700;
+  color: var(--c-text);
+}
+.workflow__step-count--done strong { color: var(--c-live); }
+.workflow__step-body {
+  border-top: 0.0625rem solid var(--c-border-2);
+}
+.workflow__step-footer {
+  padding: var(--space-12) var(--space-24);
+  border-top: 0.0625rem solid var(--c-border-2);
+  background: var(--c-surface-2);
+  font-size: var(--font-sm);
+  color: var(--c-text-2);
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-16);
+}
+
+/* 워크플로우 안의 미니 그룹 헤더 (P1 vs P2 분리 등) */
+.workflow__sub-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-12);
+  padding: var(--space-12) var(--space-24);
+  background: var(--c-surface-2);
+  border-top: 0.0625rem solid var(--c-border-2);
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--c-text);
+}
+.workflow__sub-header:first-child { border-top: 0; }
+.workflow__sub-header-icon { color: var(--c-text-2); margin-right: var(--space-8); }
+
+/* 매트릭스 승급 후보 카드형 리스트 */
+.promote-list {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.promote-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  gap: var(--space-16);
+  align-items: center;
+  padding: var(--space-16) var(--space-24);
+  border-top: 0.0625rem solid var(--c-border-2);
+}
+.promote-item:first-child { border-top: 0; }
+.promote-item__mark {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--c-noindex-bg);
+  color: var(--c-noindex);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-lg);
+  font-weight: 700;
+}
+.promote-item__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.promote-item__url {
+  font-size: var(--font-md);
+  font-weight: 500;
+  color: var(--c-text);
+}
+.promote-item__hint {
+  font-size: var(--font-sm);
+  color: var(--c-text-2);
+}
+.promote-item__progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: flex-end;
+  font-size: var(--font-sm);
+  color: var(--c-text-3);
+  font-feature-settings: "tnum";
+}
+.promote-item__progress-current {
+  font-size: var(--font-md);
+  font-weight: 600;
+  color: var(--c-text);
+}
+
+/* =========================================================
    유틸리티
    ========================================================= */
 .visually-hidden {
@@ -1475,5 +1668,9 @@ a:hover { text-decoration: underline; }
   .form__row { grid-template-columns: 1fr; }
   .data-point { grid-template-columns: auto 1fr; }
   .data-point__verify, .data-point__actions { grid-column: span 2; padding-top: 0; }
+  .workflow__step-header { grid-template-columns: auto 1fr; }
+  .workflow__step-count { grid-column: 2; justify-self: end; }
+  .promote-item { grid-template-columns: auto 1fr; }
+  .promote-item__progress { grid-column: 2; align-items: flex-start; }
   .app__main { padding: var(--space-16); }
 }
