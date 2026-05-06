@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>갱신 큐 — SEO 운영 콘솔</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Asta+Sans:wght@300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+  <div class="app">
+
+    <aside class="app__sidebar">
+      <div class="sidebar">
+        <div class="sidebar__brand">
+          <span class="sidebar__brand-eyebrow">SEO 운영</span>
+          <h1 class="sidebar__brand-title">다(多)테마 ×<br>지역 콘솔</h1>
+        </div>
+        <nav class="sidebar__nav" aria-label="대시보드 뷰">
+          <div class="sidebar__nav-group">
+            <span class="sidebar__nav-group-label">전체</span>
+            <ul class="sidebar__nav-list">
+              <li><a class="sidebar__nav-link" href="./index.html">개요</a></li>
+            </ul>
+          </div>
+          <div class="sidebar__nav-group">
+            <span class="sidebar__nav-group-label">사이트맵 5개 뷰</span>
+            <ul class="sidebar__nav-list">
+              <li><a class="sidebar__nav-link" href="./tree.html">발행 트리<span class="sidebar__nav-count">50</span></a></li>
+              <li><a class="sidebar__nav-link" href="./matrix.html">데이터 매트릭스<span class="sidebar__nav-count">85</span></a></li>
+              <li><a class="sidebar__nav-link" href="./heatmap.html">KPI 히트맵</a></li>
+              <li><a class="sidebar__nav-link" href="./silo.html">사일로 무결성<span class="sidebar__nav-count sidebar__nav-count--alert">3</span></a></li>
+              <li><a class="sidebar__nav-link sidebar__nav-link--active" href="./queue.html">갱신 큐<span class="sidebar__nav-count">14</span></a></li>
+            </ul>
+          </div>
+          <div class="sidebar__nav-group">
+            <span class="sidebar__nav-group-label">점검</span>
+            <ul class="sidebar__nav-list">
+              <li><a class="sidebar__nav-link" href="./risk.html">위험 지표</a></li>
+            </ul>
+          </div>
+        </nav>
+        <div class="sidebar__phase">
+          <span class="sidebar__phase-label">현재 단계</span>
+          <strong class="sidebar__phase-value">Phase 2</strong>
+          <span class="sidebar__phase-detail">Month 4 · 시도 허브 22 / 51</span>
+        </div>
+        <div class="sidebar__user">
+          <div class="sidebar__user-avatar" aria-hidden="true">김</div>
+          <div class="sidebar__user-body">
+            <span class="sidebar__user-name">김주원</span>
+            <span class="sidebar__user-role">SEO 운영자</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="app__main">
+      <div class="app__main-inner">
+
+        <header class="page-header">
+          <div class="page-header__heading">
+            <span class="page-header__eyebrow">사이트맵 뷰 · Update Queue</span>
+            <h2 class="page-header__title">갱신 큐</h2>
+            <p class="page-header__subtitle">데일리 작업 목록. 4개의 자동 규칙으로 매일 06:00 재계산됩니다.</p>
+          </div>
+          <div class="page-header__meta">
+            <div class="page-header__meta-item">
+              <span class="page-header__meta-label">총 큐</span>
+              <span class="page-header__meta-value">14건</span>
+            </div>
+            <span class="page-header__divider" aria-hidden="true"></span>
+            <div class="page-header__meta-item">
+              <span class="page-header__meta-label">마지막 재계산</span>
+              <span class="page-header__meta-value">04:58</span>
+            </div>
+          </div>
+        </header>
+
+        <section class="panel" aria-labelledby="queue-title">
+          <header class="panel__header">
+            <div class="panel__heading">
+              <h3 class="panel__title" id="queue-title">오늘의 갱신 큐</h3>
+              <p class="panel__subtitle">매일 15~30분. 우선순위 1·2부터 처리합니다.</p>
+            </div>
+            <div class="panel__actions">
+              <a class="panel__action-link" href="#">규칙 보기</a>
+              <a class="panel__action-link" href="#">CSV 내보내기</a>
+            </div>
+          </header>
+
+          <div class="panel__body panel__body--flush">
+            <div class="queue">
+
+              <div class="queue__group">
+                <header class="queue__group-header">
+                  <span class="queue__group-title">우선순위 1 — 90일 미갱신</span>
+                  <span class="queue__group-count">3건</span>
+                </header>
+                <ul class="queue__list">
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p1" aria-label="P1">1</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/tutoring/seoul/gangnam-gu/</span>
+                      <span class="queue-item__reason">마지막 검토 95일 전 · DataPoint 18건 · 노출 1,200/일</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--live"><span class="badge__dot"></span>live</span>
+                      <span>data 18</span>
+                    </div>
+                  </li>
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p1" aria-label="P1">1</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/academy/gyeonggi/anyang-si/</span>
+                      <span class="queue-item__reason">마지막 검토 92일 전 · 학원가 분포 데이터 갱신 필요</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--live"><span class="badge__dot"></span>live</span>
+                      <span>data 11</span>
+                    </div>
+                  </li>
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p1" aria-label="P1">1</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/tutoring/busan/</span>
+                      <span class="queue-item__reason">시도 허브 91일 미갱신 · 자식 시군구 0 (데이터 부족)</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--noindex"><span class="badge__dot"></span>noindex</span>
+                      <span>data 3</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="queue__group">
+                <header class="queue__group-header">
+                  <span class="queue__group-title">우선순위 2 — 새 데이터 유입, 미반영</span>
+                  <span class="queue__group-count">4건</span>
+                </header>
+                <ul class="queue__list">
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p2" aria-label="P2">2</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/tutoring/seoul/seocho-gu/</span>
+                      <span class="queue-item__reason">DataPoint 3건 추가 (qualitative 2 · faq 1) · 검증 대기</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--live"><span class="badge__dot"></span>live</span>
+                      <span>data 14 · +3</span>
+                    </div>
+                  </li>
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p2" aria-label="P2">2</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/tutoring/seoul/songpa-gu/</span>
+                      <span class="queue-item__reason">DataPoint 1건 추가 → 누적 4건 · ●로 승급까지 1건</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--noindex"><span class="badge__dot"></span>noindex</span>
+                      <span>data 4</span>
+                    </div>
+                  </li>
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p2" aria-label="P2">2</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/academy/seoul/gangnam-gu/</span>
+                      <span class="queue-item__reason">comparison 데이터 2건 검증 완료 · 노드 갱신 필요</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--live"><span class="badge__dot"></span>live</span>
+                      <span>data 12 · +2</span>
+                    </div>
+                  </li>
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p2" aria-label="P2">2</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/tutoring/incheon/</span>
+                      <span class="queue-item__reason">매칭 가능 선생님 데이터 12건 자동 수집 · 미검증</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--live"><span class="badge__dot"></span>live</span>
+                      <span>data 9 · +12</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="queue__group">
+                <header class="queue__group-header">
+                  <span class="queue__group-title">우선순위 3 — 노출 급증, 보강 기회</span>
+                  <span class="queue__group-count">3건</span>
+                </header>
+                <ul class="queue__list">
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p3" aria-label="P3">3</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/tutoring/incheon/yeonsu-gu/</span>
+                      <span class="queue-item__reason">지난주 노출 +180% · 평균 게재 18위 · CTR 1.8%</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--live"><span class="badge__dot"></span>live</span>
+                      <span>data 9</span>
+                    </div>
+                  </li>
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p3" aria-label="P3">3</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/tutoring/gyeonggi/gunpo-si/</span>
+                      <span class="queue-item__reason">지난주 노출 +112% · 자체 데이터 발행 후보</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--live"><span class="badge__dot"></span>live</span>
+                      <span>data 8</span>
+                    </div>
+                  </li>
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p3" aria-label="P3">3</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/guides/how-to-choose-tutor/</span>
+                      <span class="queue-item__reason">노출 +88% · AI 인용 시작 · FAQ 보강 권장</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--live"><span class="badge__dot"></span>live</span>
+                      <span>—</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="queue__group">
+                <header class="queue__group-header">
+                  <span class="queue__group-title">우선순위 4 — 약한 페이지, 분기 정리 후보</span>
+                  <span class="queue__group-count">4건</span>
+                </header>
+                <ul class="queue__list">
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p4" aria-label="P4">4</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/tutoring/jeju/seogwipo-si/</span>
+                      <span class="queue-item__reason">90일 트래픽 0 · 통합 또는 삭제 결정 필요</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--noindex"><span class="badge__dot"></span>noindex</span>
+                      <span>data 2</span>
+                    </div>
+                  </li>
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p4" aria-label="P4">4</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/academy/gangwon/</span>
+                      <span class="queue-item__reason">120일 인덱스 안 됨 · 부모 통합 검토</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--noindex"><span class="badge__dot"></span>noindex</span>
+                      <span>data 4</span>
+                    </div>
+                  </li>
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p4" aria-label="P4">4</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/contents/jeonnam/</span>
+                      <span class="queue-item__reason">노출 0 · 클릭 0 · 데이터 누락</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--draft"><span class="badge__dot"></span>draft</span>
+                      <span>data 1</span>
+                    </div>
+                  </li>
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p4" aria-label="P4">4</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/tutoring/sejong/</span>
+                      <span class="queue-item__reason">고아 노드 의심 · 사일로 검사 결과 부모 누락</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--danger"><span class="badge__dot"></span>orphan</span>
+                      <span>data 6</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <footer class="panel__footer">
+            <span>큐는 매일 06:00 KST 자동 재계산 · 마지막 갱신 04:58</span>
+            <a class="panel__action-link" href="#">cron 설정</a>
+          </footer>
+        </section>
+
+        <section class="panel" aria-labelledby="rules-title">
+          <header class="panel__header">
+            <div class="panel__heading">
+              <h3 class="panel__title" id="rules-title">큐 자동 생성 규칙</h3>
+              <p class="panel__subtitle">규칙은 코드로 관리됩니다. 사람이 큐를 직접 편집하지 않습니다.</p>
+            </div>
+          </header>
+          <div class="panel__body">
+            <ul class="rules">
+              <li class="rules__item">
+                <span class="rules__index">P1</span>
+                <div class="rules__body">
+                  <span class="rules__title">90일 미갱신 노드</span>
+                  <span class="rules__detail">last_review_at &lt; NOW() - INTERVAL '90 days' AND status IN ('live','noindex')</span>
+                </div>
+                <span class="rules__status">자동</span>
+              </li>
+              <li class="rules__item">
+                <span class="rules__index">P2</span>
+                <div class="rules__body">
+                  <span class="rules__title">새 데이터 유입, 미반영</span>
+                  <span class="rules__detail">DataPoint INSERT 이후 last_review_at 갱신되지 않은 노드</span>
+                </div>
+                <span class="rules__status">자동</span>
+              </li>
+              <li class="rules__item">
+                <span class="rules__index">P3</span>
+                <div class="rules__body">
+                  <span class="rules__title">노출 급증 — 보강 기회</span>
+                  <span class="rules__detail">Search Console 주간 노출 +50% 이상 · 평균 순위 30위 이내</span>
+                </div>
+                <span class="rules__status">자동</span>
+              </li>
+              <li class="rules__item">
+                <span class="rules__index">P4</span>
+                <div class="rules__body">
+                  <span class="rules__title">약한 페이지 — 분기 정리 후보</span>
+                  <span class="rules__detail">90일 트래픽 0 또는 인덱스 안 됨 또는 사일로 위반</span>
+                </div>
+                <span class="rules__status">자동</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+</body>
+</html>

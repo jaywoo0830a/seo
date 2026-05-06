@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>발행 트리 — SEO 운영 콘솔</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Asta+Sans:wght@300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+  <div class="app">
+
+    <aside class="app__sidebar">
+      <div class="sidebar">
+        <div class="sidebar__brand">
+          <span class="sidebar__brand-eyebrow">SEO 운영</span>
+          <h1 class="sidebar__brand-title">다(多)테마 ×<br>지역 콘솔</h1>
+        </div>
+        <nav class="sidebar__nav" aria-label="대시보드 뷰">
+          <div class="sidebar__nav-group">
+            <span class="sidebar__nav-group-label">전체</span>
+            <ul class="sidebar__nav-list">
+              <li><a class="sidebar__nav-link" href="./index.html">개요</a></li>
+            </ul>
+          </div>
+          <div class="sidebar__nav-group">
+            <span class="sidebar__nav-group-label">사이트맵 5개 뷰</span>
+            <ul class="sidebar__nav-list">
+              <li><a class="sidebar__nav-link sidebar__nav-link--active" href="./tree.html">발행 트리<span class="sidebar__nav-count">50</span></a></li>
+              <li><a class="sidebar__nav-link" href="./matrix.html">데이터 매트릭스<span class="sidebar__nav-count">85</span></a></li>
+              <li><a class="sidebar__nav-link" href="./heatmap.html">KPI 히트맵</a></li>
+              <li><a class="sidebar__nav-link" href="./silo.html">사일로 무결성<span class="sidebar__nav-count sidebar__nav-count--alert">3</span></a></li>
+              <li><a class="sidebar__nav-link" href="./queue.html">갱신 큐<span class="sidebar__nav-count">14</span></a></li>
+            </ul>
+          </div>
+          <div class="sidebar__nav-group">
+            <span class="sidebar__nav-group-label">점검</span>
+            <ul class="sidebar__nav-list">
+              <li><a class="sidebar__nav-link" href="./risk.html">위험 지표</a></li>
+            </ul>
+          </div>
+        </nav>
+        <div class="sidebar__phase">
+          <span class="sidebar__phase-label">현재 단계</span>
+          <strong class="sidebar__phase-value">Phase 2</strong>
+          <span class="sidebar__phase-detail">Month 4 · 시도 허브 22 / 51</span>
+        </div>
+        <div class="sidebar__user">
+          <div class="sidebar__user-avatar" aria-hidden="true">김</div>
+          <div class="sidebar__user-body">
+            <span class="sidebar__user-name">김주원</span>
+            <span class="sidebar__user-role">SEO 운영자</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="app__main">
+      <div class="app__main-inner">
+
+        <header class="page-header">
+          <div class="page-header__heading">
+            <span class="page-header__eyebrow">사이트맵 뷰 · Public Tree</span>
+            <h2 class="page-header__title">발행 트리 — sitemap.xml의 원천</h2>
+            <p class="page-header__subtitle">사용자와 검색엔진이 보는 구조. content_node 테이블에서 결정론적으로 도출됩니다.</p>
+          </div>
+          <div class="page-header__meta">
+            <div class="page-header__meta-item">
+              <span class="page-header__meta-label">live 노드</span>
+              <span class="page-header__meta-value">50</span>
+            </div>
+            <span class="page-header__divider" aria-hidden="true"></span>
+            <div class="page-header__meta-item">
+              <span class="page-header__meta-label">최대 깊이</span>
+              <span class="page-header__meta-value">4 / 5</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="page-grid">
+
+          <div class="page-grid__main">
+
+            <section class="panel" aria-labelledby="tree-title">
+              <header class="panel__header">
+                <div class="panel__heading">
+                  <h3 class="panel__title" id="tree-title">사이트 구조</h3>
+                  <p class="panel__subtitle">URL = theme_path + region_path · 함수 출력이므로 다른 표현 불가.</p>
+                </div>
+                <div class="panel__actions">
+                  <a class="panel__action-link" href="#">sitemap.xml ↗</a>
+                  <a class="panel__action-link" href="#">JSON 내보내기</a>
+                </div>
+              </header>
+
+              <div class="filter-bar" role="toolbar" aria-label="필터">
+                <div class="filter-bar__group">
+                  <span>상태</span>
+                  <button class="filter-bar__chip filter-bar__chip--active">전체</button>
+                  <button class="filter-bar__chip">live</button>
+                  <button class="filter-bar__chip">noindex</button>
+                  <button class="filter-bar__chip">draft</button>
+                </div>
+                <div class="filter-bar__group">
+                  <span>테마</span>
+                  <button class="filter-bar__chip filter-bar__chip--active">전체</button>
+                  <button class="filter-bar__chip">tutoring</button>
+                  <button class="filter-bar__chip">academy</button>
+                  <button class="filter-bar__chip">contents</button>
+                </div>
+              </div>
+
+              <div class="panel__body">
+                <ul class="tree">
+                  <li>
+                    <div class="tree-node">
+                      <span class="tree-node__icon">▾</span>
+                      <span class="tree-node__url tree-node__url--hub">/</span>
+                      <span class="tree-node__meta"><span class="badge badge--ink">루트</span></span>
+                    </div>
+
+                    <ul class="tree__list tree__list--nested">
+                      <li>
+                        <div class="tree-node">
+                          <span class="tree-node__icon">▾</span>
+                          <span class="tree-node__url tree-node__url--hub">/tutoring/</span>
+                          <span class="tree-node__meta">
+                            <span class="badge badge--live"><span class="badge__dot"></span>HUB · live</span>
+                            <span class="tree-node__data">depth 0</span>
+                          </span>
+                        </div>
+
+                        <ul class="tree__list tree__list--nested">
+                          <li>
+                            <div class="tree-node">
+                              <span class="tree-node__icon">▾</span>
+                              <span class="tree-node__url">/tutoring/seoul/</span>
+                              <span class="tree-node__meta">
+                                <span class="badge badge--live"><span class="badge__dot"></span>SIDO · live</span>
+                                <span class="tree-node__data tree-node__data--ok">data 42</span>
+                              </span>
+                            </div>
+                            <ul class="tree__list tree__list--nested">
+                              <li>
+                                <div class="tree-node">
+                                  <span class="tree-node__icon">▾</span>
+                                  <span class="tree-node__url">/tutoring/seoul/gangnam-gu/</span>
+                                  <span class="tree-node__meta">
+                                    <span class="badge badge--live"><span class="badge__dot"></span>GU · live</span>
+                                    <span class="tree-node__data tree-node__data--ok">data 18</span>
+                                  </span>
+                                </div>
+                                <ul class="tree__list tree__list--nested">
+                                  <li>
+                                    <div class="tree-node">
+                                      <span class="tree-node__icon">▸</span>
+                                      <span class="tree-node__url">/tutoring/seoul/gangnam-gu/daechi-dong/</span>
+                                      <span class="tree-node__meta">
+                                        <span class="badge badge--noindex"><span class="badge__dot"></span>DONG · noindex</span>
+                                        <span class="tree-node__data tree-node__data--low">data 2</span>
+                                      </span>
+                                    </div>
+                                  </li>
+                                  <li>
+                                    <div class="tree-node">
+                                      <span class="tree-node__icon">▸</span>
+                                      <span class="tree-node__url">/tutoring/seoul/gangnam-gu/yeoksam-dong/</span>
+                                      <span class="tree-node__meta">
+                                        <span class="badge badge--live"><span class="badge__dot"></span>DONG · live</span>
+                                        <span class="tree-node__data tree-node__data--ok">data 7</span>
+                                      </span>
+                                    </div>
+                                  </li>
+                                </ul>
+                              </li>
+                              <li>
+                                <div class="tree-node">
+                                  <span class="tree-node__icon">▸</span>
+                                  <span class="tree-node__url">/tutoring/seoul/seocho-gu/</span>
+                                  <span class="tree-node__meta">
+                                    <span class="badge badge--live"><span class="badge__dot"></span>GU · live</span>
+                                    <span class="tree-node__data tree-node__data--ok">data 14</span>
+                                  </span>
+                                </div>
+                              </li>
+                              <li>
+                                <div class="tree-node">
+                                  <span class="tree-node__icon">▸</span>
+                                  <span class="tree-node__url">/tutoring/seoul/songpa-gu/</span>
+                                  <span class="tree-node__meta">
+                                    <span class="badge badge--noindex"><span class="badge__dot"></span>GU · noindex</span>
+                                    <span class="tree-node__data tree-node__data--low">data 4</span>
+                                  </span>
+                                </div>
+                              </li>
+                            </ul>
+                          </li>
+                          <li>
+                            <div class="tree-node">
+                              <span class="tree-node__icon">▸</span>
+                              <span class="tree-node__url">/tutoring/gyeonggi/</span>
+                              <span class="tree-node__meta">
+                                <span class="badge badge--live"><span class="badge__dot"></span>SIDO · live</span>
+                                <span class="tree-node__data tree-node__data--ok">data 24</span>
+                              </span>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="tree-node">
+                              <span class="tree-node__icon">▸</span>
+                              <span class="tree-node__url">/tutoring/incheon/</span>
+                              <span class="tree-node__meta">
+                                <span class="badge badge--live"><span class="badge__dot"></span>SIDO · live</span>
+                                <span class="tree-node__data tree-node__data--ok">data 9</span>
+                              </span>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="tree-node">
+                              <span class="tree-node__icon">▸</span>
+                              <span class="tree-node__url">/tutoring/busan/</span>
+                              <span class="tree-node__meta">
+                                <span class="badge badge--noindex"><span class="badge__dot"></span>SIDO · noindex</span>
+                                <span class="tree-node__data tree-node__data--low">data 3</span>
+                              </span>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="tree-node">
+                              <span class="tree-node__icon">▸</span>
+                              <span class="tree-node__url">/tutoring/sejong/</span>
+                              <span class="tree-node__meta">
+                                <span class="badge badge--danger"><span class="badge__dot"></span>orphan</span>
+                                <span class="tree-node__data tree-node__data--low">부모 누락</span>
+                              </span>
+                            </div>
+                          </li>
+                        </ul>
+                      </li>
+
+                      <li>
+                        <div class="tree-node">
+                          <span class="tree-node__icon">▾</span>
+                          <span class="tree-node__url tree-node__url--hub">/academy/</span>
+                          <span class="tree-node__meta">
+                            <span class="badge badge--live"><span class="badge__dot"></span>HUB · live</span>
+                            <span class="tree-node__data">자식 14</span>
+                          </span>
+                        </div>
+                        <ul class="tree__list tree__list--nested">
+                          <li>
+                            <div class="tree-node">
+                              <span class="tree-node__icon">▸</span>
+                              <span class="tree-node__url">/academy/seoul/</span>
+                              <span class="tree-node__meta">
+                                <span class="badge badge--live"><span class="badge__dot"></span>SIDO · live</span>
+                                <span class="tree-node__data tree-node__data--ok">data 30</span>
+                              </span>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="tree-node">
+                              <span class="tree-node__icon">▸</span>
+                              <span class="tree-node__url">/academy/gyeonggi/</span>
+                              <span class="tree-node__meta">
+                                <span class="badge badge--live"><span class="badge__dot"></span>SIDO · live</span>
+                                <span class="tree-node__data tree-node__data--ok">data 18</span>
+                              </span>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="tree-node">
+                              <span class="tree-node__icon">▸</span>
+                              <span class="tree-node__url">/academy/gangwon/</span>
+                              <span class="tree-node__meta">
+                                <span class="badge badge--noindex"><span class="badge__dot"></span>SIDO · noindex</span>
+                                <span class="tree-node__data tree-node__data--low">data 4</span>
+                              </span>
+                            </div>
+                          </li>
+                        </ul>
+                      </li>
+
+                      <li>
+                        <div class="tree-node">
+                          <span class="tree-node__icon">▸</span>
+                          <span class="tree-node__url tree-node__url--hub">/contents/</span>
+                          <span class="tree-node__meta">
+                            <span class="badge badge--live"><span class="badge__dot"></span>HUB · live</span>
+                            <span class="tree-node__data">자식 8</span>
+                          </span>
+                        </div>
+                      </li>
+
+                      <li>
+                        <div class="tree-node">
+                          <span class="tree-node__icon">▾</span>
+                          <span class="tree-node__url tree-node__url--hub">/guides/</span>
+                          <span class="tree-node__meta">
+                            <span class="badge badge--live"><span class="badge__dot"></span>INFO · live</span>
+                            <span class="tree-node__data">정보형 22</span>
+                          </span>
+                        </div>
+                        <ul class="tree__list tree__list--nested">
+                          <li>
+                            <div class="tree-node">
+                              <span class="tree-node__icon">▸</span>
+                              <span class="tree-node__url">/guides/how-to-choose-tutor/</span>
+                              <span class="tree-node__meta">
+                                <span class="badge badge--live"><span class="badge__dot"></span>INFO · live</span>
+                                <span class="tree-node__data tree-node__data--ok">data —</span>
+                              </span>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="tree-node">
+                              <span class="tree-node__icon">▸</span>
+                              <span class="tree-node__url">/guides/private-vs-academy/</span>
+                              <span class="tree-node__meta">
+                                <span class="badge badge--live"><span class="badge__dot"></span>INFO · live</span>
+                                <span class="tree-node__data tree-node__data--ok">data —</span>
+                              </span>
+                            </div>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+
+              <footer class="panel__footer">
+                <span>최대 깊이 4 / 5 · sitemap.xml 노드 50개</span>
+                <span>마지막 빌드 04:58 · 다음 cron 06:00</span>
+              </footer>
+            </section>
+
+          </div>
+
+          <aside class="page-grid__aside">
+
+            <section class="panel" aria-labelledby="link-rule-title">
+              <header class="panel__header">
+                <div class="panel__heading">
+                  <h3 class="panel__title" id="link-rule-title">내부 링크 규칙</h3>
+                  <p class="panel__subtitle">권위가 흐르는 길.</p>
+                </div>
+              </header>
+              <div class="panel__body">
+                <ul class="rules">
+                  <li class="rules__item">
+                    <span class="rules__index">↑</span>
+                    <div class="rules__body">
+                      <span class="rules__title">자식 → 부모 (필수)</span>
+                      <span class="rules__detail">앵커 텍스트 다양화. 동일 반복 금지.</span>
+                    </div>
+                    <span class="rules__status">필수</span>
+                  </li>
+                  <li class="rules__item">
+                    <span class="rules__index">↓</span>
+                    <div class="rules__body">
+                      <span class="rules__title">부모 → 자식 (목록)</span>
+                      <span class="rules__detail">자식 H1을 그대로 앵커로.</span>
+                    </div>
+                    <span class="rules__status">필수</span>
+                  </li>
+                  <li class="rules__item">
+                    <span class="rules__index">↔</span>
+                    <div class="rules__body">
+                      <span class="rules__title">자식 ↔ 자식</span>
+                      <span class="rules__detail">인근 지역 또는 동일 학년만.</span>
+                    </div>
+                    <span class="rules__status">선택</span>
+                  </li>
+                  <li class="rules__item">
+                    <span class="rules__index">✗</span>
+                    <div class="rules__body">
+                      <span class="rules__title">자식 → 다른 부모의 자식</span>
+                      <span class="rules__detail">사일로 침범. DB 트리거에서 거부.</span>
+                    </div>
+                    <span class="rules__status">금지</span>
+                  </li>
+                </ul>
+              </div>
+            </section>
+
+            <section class="panel" aria-labelledby="depth-title">
+              <header class="panel__header">
+                <div class="panel__heading">
+                  <h3 class="panel__title" id="depth-title">깊이 분포</h3>
+                </div>
+              </header>
+              <div class="panel__body">
+                <div class="entity-stats">
+                  <div class="entity-stat">
+                    <span class="entity-stat__label">depth 0 · HUB</span>
+                    <span class="entity-stat__value">5</span>
+                    <span class="entity-stat__sub">루트 + 테마 4</span>
+                  </div>
+                  <div class="entity-stat">
+                    <span class="entity-stat__label">depth 1 · 시도</span>
+                    <span class="entity-stat__value">22</span>
+                    <span class="entity-stat__sub">진행 22 / 51</span>
+                  </div>
+                  <div class="entity-stat">
+                    <span class="entity-stat__label">depth 2 · 시군구</span>
+                    <span class="entity-stat__value">19</span>
+                    <span class="entity-stat__sub">Phase 3 시작 전</span>
+                  </div>
+                  <div class="entity-stat">
+                    <span class="entity-stat__label">depth 3 · 동</span>
+                    <span class="entity-stat__value">2</span>
+                    <span class="entity-stat__sub">Phase 4 예정</span>
+                  </div>
+                  <div class="entity-stat entity-stat--wide">
+                    <span class="entity-stat__label">정보형</span>
+                    <span class="entity-stat__value">22</span>
+                    <span class="entity-stat__sub">/guides/ 하위 · 가이드 + FAQ</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+          </aside>
+
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+</body>
+</html>

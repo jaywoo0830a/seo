@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>위험 지표 — SEO 운영 콘솔</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Asta+Sans:wght@300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+  <div class="app">
+
+    <aside class="app__sidebar">
+      <div class="sidebar">
+        <div class="sidebar__brand">
+          <span class="sidebar__brand-eyebrow">SEO 운영</span>
+          <h1 class="sidebar__brand-title">다(多)테마 ×<br>지역 콘솔</h1>
+        </div>
+        <nav class="sidebar__nav" aria-label="대시보드 뷰">
+          <div class="sidebar__nav-group">
+            <span class="sidebar__nav-group-label">전체</span>
+            <ul class="sidebar__nav-list">
+              <li><a class="sidebar__nav-link" href="./index.html">개요</a></li>
+            </ul>
+          </div>
+          <div class="sidebar__nav-group">
+            <span class="sidebar__nav-group-label">사이트맵 5개 뷰</span>
+            <ul class="sidebar__nav-list">
+              <li><a class="sidebar__nav-link" href="./tree.html">발행 트리<span class="sidebar__nav-count">50</span></a></li>
+              <li><a class="sidebar__nav-link" href="./matrix.html">데이터 매트릭스<span class="sidebar__nav-count">85</span></a></li>
+              <li><a class="sidebar__nav-link" href="./heatmap.html">KPI 히트맵</a></li>
+              <li><a class="sidebar__nav-link" href="./silo.html">사일로 무결성<span class="sidebar__nav-count sidebar__nav-count--alert">3</span></a></li>
+              <li><a class="sidebar__nav-link" href="./queue.html">갱신 큐<span class="sidebar__nav-count">14</span></a></li>
+            </ul>
+          </div>
+          <div class="sidebar__nav-group">
+            <span class="sidebar__nav-group-label">점검</span>
+            <ul class="sidebar__nav-list">
+              <li><a class="sidebar__nav-link sidebar__nav-link--active" href="./risk.html">위험 지표</a></li>
+            </ul>
+          </div>
+        </nav>
+        <div class="sidebar__phase">
+          <span class="sidebar__phase-label">현재 단계</span>
+          <strong class="sidebar__phase-value">Phase 2</strong>
+          <span class="sidebar__phase-detail">Month 4 · 시도 허브 22 / 51</span>
+        </div>
+        <div class="sidebar__user">
+          <div class="sidebar__user-avatar" aria-hidden="true">김</div>
+          <div class="sidebar__user-body">
+            <span class="sidebar__user-name">김주원</span>
+            <span class="sidebar__user-role">SEO 운영자</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="app__main">
+      <div class="app__main-inner">
+
+        <header class="page-header">
+          <div class="page-header__heading">
+            <span class="page-header__eyebrow">점검 · Risk Indicators</span>
+            <h2 class="page-header__title">위험 지표 — 분기 점검</h2>
+            <p class="page-header__subtitle">임계값 초과 시 즉시 대응. 약한 페이지가 도메인 권위를 깎습니다 — 방치는 선택지가 아닙니다.</p>
+          </div>
+          <div class="page-header__meta">
+            <div class="page-header__meta-item">
+              <span class="page-header__meta-label">현 분기</span>
+              <span class="page-header__meta-value">2026 Q2</span>
+            </div>
+            <span class="page-header__divider" aria-hidden="true"></span>
+            <div class="page-header__meta-item">
+              <span class="page-header__meta-label">다음 분기 점검</span>
+              <span class="page-header__meta-value">2026-06-29</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="page-grid">
+
+          <div class="page-grid__main">
+
+            <section class="panel" aria-labelledby="risk-title">
+              <header class="panel__header">
+                <div class="panel__heading">
+                  <h3 class="panel__title" id="risk-title">위험 지표</h3>
+                  <p class="panel__subtitle">분기별 점검 — 임계값 초과 시 즉시 대응.</p>
+                </div>
+              </header>
+              <div class="panel__body">
+                <ul class="risk-list">
+                  <li class="risk-item">
+                    <div class="risk-item__label">
+                      <span class="risk-item__name">미인덱스 페이지 비율</span>
+                      <span class="risk-item__threshold">임계 30% 이상 · 페이지 품질 점검</span>
+                    </div>
+                    <span class="risk-item__value risk-item__value--ok">14<span class="risk-item__unit">%</span></span>
+                  </li>
+                  <li class="risk-item">
+                    <div class="risk-item__label">
+                      <span class="risk-item__name">Soft 404 / 중복 콘텐츠</span>
+                      <span class="risk-item__threshold">임계 10건 이상 · 즉시 통합/삭제</span>
+                    </div>
+                    <span class="risk-item__value risk-item__value--ok">2<span class="risk-item__unit">건</span></span>
+                  </li>
+                  <li class="risk-item">
+                    <div class="risk-item__label">
+                      <span class="risk-item__name">평균 클릭률 (CTR)</span>
+                      <span class="risk-item__threshold">임계 1% 미만 · 제목/메타 재작성</span>
+                    </div>
+                    <span class="risk-item__value risk-item__value--ok">3.8<span class="risk-item__unit">%</span></span>
+                  </li>
+                  <li class="risk-item">
+                    <div class="risk-item__label">
+                      <span class="risk-item__name">Core Web Vitals "Poor"</span>
+                      <span class="risk-item__threshold">임계 25% 이상 · 기술 점검</span>
+                    </div>
+                    <span class="risk-item__value risk-item__value--warn">18<span class="risk-item__unit">%</span></span>
+                  </li>
+                  <li class="risk-item">
+                    <div class="risk-item__label">
+                      <span class="risk-item__name">90일 트래픽 0 페이지</span>
+                      <span class="risk-item__threshold">임계 30% 이상 · 분기 정리 대상</span>
+                    </div>
+                    <span class="risk-item__value risk-item__value--warn">6<span class="risk-item__unit">개</span></span>
+                  </li>
+                  <li class="risk-item">
+                    <div class="risk-item__label">
+                      <span class="risk-item__name">키워드 카니발리제이션</span>
+                      <span class="risk-item__threshold">두 노드가 같은 쿼리에 동시 노출</span>
+                    </div>
+                    <span class="risk-item__value risk-item__value--warn">2<span class="risk-item__unit">쌍</span></span>
+                  </li>
+                  <li class="risk-item">
+                    <div class="risk-item__label">
+                      <span class="risk-item__name">발행 게이트 우회 시도</span>
+                      <span class="risk-item__threshold">DB 트리거에서 거부됨</span>
+                    </div>
+                    <span class="risk-item__value risk-item__value--ok">0</span>
+                  </li>
+                </ul>
+              </div>
+            </section>
+
+            <section class="panel" aria-labelledby="trap-title">
+              <header class="panel__header">
+                <div class="panel__heading">
+                  <h3 class="panel__title" id="trap-title">12개월 4가지 함정</h3>
+                  <p class="panel__subtitle">12개월 전략 보고서가 반복 강조하는 위험 시나리오.</p>
+                </div>
+              </header>
+              <div class="panel__body">
+                <ul class="rules">
+                  <li class="rules__item">
+                    <span class="rules__index">01</span>
+                    <div class="rules__body">
+                      <span class="rules__title">Month 2~3 충동 — AI 대량 생성</span>
+                      <span class="rules__detail">"동 페이지 3,500개를 한 번에 만들자" → 2026년 3월 업데이트로 60~90% 순위 하락한 사이트들의 패턴.</span>
+                    </div>
+                    <span class="rules__status">통과</span>
+                  </li>
+                  <li class="rules__item">
+                    <span class="rules__index">02</span>
+                    <div class="rules__body">
+                      <span class="rules__title">키워드 카니발리제이션</span>
+                      <span class="rules__detail">시도/시군구 페이지가 같은 머리어 경쟁. 분기별 키워드 매핑 점검 필요.</span>
+                    </div>
+                    <span class="rules__status">감시 중</span>
+                  </li>
+                  <li class="rules__item">
+                    <span class="rules__index">03</span>
+                    <div class="rules__body">
+                      <span class="rules__title">약한 페이지 누적</span>
+                      <span class="rules__detail">트래픽 0 페이지가 30% 넘으면 도메인 권위 하락. 분기별 강제 정리.</span>
+                    </div>
+                    <span class="rules__status">분기 정리</span>
+                  </li>
+                  <li class="rules__item">
+                    <span class="rules__index">04</span>
+                    <div class="rules__body">
+                      <span class="rules__title">테마 분산</span>
+                      <span class="rules__detail">너무 많은 테마. Phase 0에서 3~5개로 제한, 깊어진 후에만 추가.</span>
+                    </div>
+                    <span class="rules__status">5개 유지</span>
+                  </li>
+                </ul>
+              </div>
+            </section>
+
+          </div>
+
+          <aside class="page-grid__aside">
+
+            <section class="panel" aria-labelledby="quarter-title">
+              <header class="panel__header">
+                <div class="panel__heading">
+                  <h3 class="panel__title" id="quarter-title">분기 점검 체크리스트</h3>
+                  <p class="panel__subtitle">매 분기 마지막 주 반나절.</p>
+                </div>
+                <div class="panel__actions">
+                  <span>3 / 7</span>
+                </div>
+              </header>
+              <div class="panel__body">
+                <ul class="checklist">
+                  <li class="checklist__item checklist__item--done">
+                    <span class="checklist__check" aria-hidden="true"></span>
+                    <span class="checklist__label">트래픽 0 페이지 추출</span>
+                    <span class="checklist__hint">6개</span>
+                  </li>
+                  <li class="checklist__item checklist__item--done">
+                    <span class="checklist__check" aria-hidden="true"></span>
+                    <span class="checklist__label">카니발리제이션 검출 결과 검토</span>
+                    <span class="checklist__hint">2쌍</span>
+                  </li>
+                  <li class="checklist__item checklist__item--done">
+                    <span class="checklist__check" aria-hidden="true"></span>
+                    <span class="checklist__label">90일 미갱신 노드 검토</span>
+                    <span class="checklist__hint">3건</span>
+                  </li>
+                  <li class="checklist__item">
+                    <span class="checklist__check" aria-hidden="true"></span>
+                    <span class="checklist__label">"노출 ↑ 클릭 0" → 메타 재작성</span>
+                    <span class="checklist__hint">1건</span>
+                  </li>
+                  <li class="checklist__item">
+                    <span class="checklist__check" aria-hidden="true"></span>
+                    <span class="checklist__label">새 백링크 ≥ 5개 획득</span>
+                    <span class="checklist__hint">3 / 5</span>
+                  </li>
+                  <li class="checklist__item">
+                    <span class="checklist__check" aria-hidden="true"></span>
+                    <span class="checklist__label">자체 데이터 발행 ≥ 1건</span>
+                    <span class="checklist__hint">군포 보고서 작성 중</span>
+                  </li>
+                  <li class="checklist__item">
+                    <span class="checklist__check" aria-hidden="true"></span>
+                    <span class="checklist__label">다음 분기 발행 캘린더 잠금</span>
+                    <span class="checklist__hint">Q3 미정</span>
+                  </li>
+                </ul>
+              </div>
+            </section>
+
+            <section class="panel" aria-labelledby="kpi-target-title">
+              <header class="panel__header">
+                <div class="panel__heading">
+                  <h3 class="panel__title" id="kpi-target-title">분기별 KPI 목표</h3>
+                </div>
+              </header>
+              <div class="panel__body">
+                <div class="entity-stats">
+                  <div class="entity-stat">
+                    <span class="entity-stat__label">Q1 — 노출</span>
+                    <span class="entity-stat__value">달성</span>
+                    <span class="entity-stat__sub">100~300/일</span>
+                  </div>
+                  <div class="entity-stat">
+                    <span class="entity-stat__label">Q2 — 노출</span>
+                    <span class="entity-stat__value">정상</span>
+                    <span class="entity-stat__sub">1,820/일</span>
+                  </div>
+                  <div class="entity-stat">
+                    <span class="entity-stat__label">Q2 — 인덱스</span>
+                    <span class="entity-stat__value">86%</span>
+                    <span class="entity-stat__sub">목표 85% 달성</span>
+                  </div>
+                  <div class="entity-stat">
+                    <span class="entity-stat__label">Q2 — 평균 순위</span>
+                    <span class="entity-stat__value">28.4</span>
+                    <span class="entity-stat__sub">목표 20~40</span>
+                  </div>
+                  <div class="entity-stat entity-stat--wide">
+                    <span class="entity-stat__label">Q3 — 자연 검색 일 방문자</span>
+                    <span class="entity-stat__value">목표 200~500</span>
+                    <span class="entity-stat__sub">현재 일 94 클릭 · 진입 준비 중</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+          </aside>
+
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>사일로 무결성 — SEO 운영 콘솔</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Asta+Sans:wght@300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+  <div class="app">
+
+    <aside class="app__sidebar">
+      <div class="sidebar">
+        <div class="sidebar__brand">
+          <span class="sidebar__brand-eyebrow">SEO 운영</span>
+          <h1 class="sidebar__brand-title">다(多)테마 ×<br>지역 콘솔</h1>
+        </div>
+        <nav class="sidebar__nav" aria-label="대시보드 뷰">
+          <div class="sidebar__nav-group">
+            <span class="sidebar__nav-group-label">전체</span>
+            <ul class="sidebar__nav-list">
+              <li><a class="sidebar__nav-link" href="./index.html">개요</a></li>
+            </ul>
+          </div>
+          <div class="sidebar__nav-group">
+            <span class="sidebar__nav-group-label">사이트맵 5개 뷰</span>
+            <ul class="sidebar__nav-list">
+              <li><a class="sidebar__nav-link" href="./tree.html">발행 트리<span class="sidebar__nav-count">50</span></a></li>
+              <li><a class="sidebar__nav-link" href="./matrix.html">데이터 매트릭스<span class="sidebar__nav-count">85</span></a></li>
+              <li><a class="sidebar__nav-link" href="./heatmap.html">KPI 히트맵</a></li>
+              <li><a class="sidebar__nav-link sidebar__nav-link--active" href="./silo.html">사일로 무결성<span class="sidebar__nav-count sidebar__nav-count--alert">3</span></a></li>
+              <li><a class="sidebar__nav-link" href="./queue.html">갱신 큐<span class="sidebar__nav-count">14</span></a></li>
+            </ul>
+          </div>
+          <div class="sidebar__nav-group">
+            <span class="sidebar__nav-group-label">점검</span>
+            <ul class="sidebar__nav-list">
+              <li><a class="sidebar__nav-link" href="./risk.html">위험 지표</a></li>
+            </ul>
+          </div>
+        </nav>
+        <div class="sidebar__phase">
+          <span class="sidebar__phase-label">현재 단계</span>
+          <strong class="sidebar__phase-value">Phase 2</strong>
+          <span class="sidebar__phase-detail">Month 4 · 시도 허브 22 / 51</span>
+        </div>
+        <div class="sidebar__user">
+          <div class="sidebar__user-avatar" aria-hidden="true">김</div>
+          <div class="sidebar__user-body">
+            <span class="sidebar__user-name">김주원</span>
+            <span class="sidebar__user-role">SEO 운영자</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="app__main">
+      <div class="app__main-inner">
+
+        <header class="page-header">
+          <div class="page-header__heading">
+            <span class="page-header__eyebrow">사이트맵 뷰 · Silo Integrity</span>
+            <h2 class="page-header__title">사일로 무결성</h2>
+            <p class="page-header__subtitle">자동 검사기가 매주 실행. 위반은 토픽 권위를 분산시키므로 즉시 처리합니다.</p>
+          </div>
+          <div class="page-header__meta">
+            <div class="page-header__meta-item">
+              <span class="page-header__meta-label">현재 위반</span>
+              <span class="page-header__meta-value">3건</span>
+            </div>
+            <span class="page-header__divider" aria-hidden="true"></span>
+            <div class="page-header__meta-item">
+              <span class="page-header__meta-label">마지막 검사</span>
+              <span class="page-header__meta-value">2026-05-05 23:00</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="page-grid">
+
+          <div class="page-grid__main">
+
+            <section class="panel" aria-labelledby="alert-title">
+              <header class="panel__header">
+                <div class="panel__heading">
+                  <h3 class="panel__title" id="alert-title">현재 무결성 위반</h3>
+                  <p class="panel__subtitle">사일로 침범 / 고아 노드 / 자식 누락 등 5가지 규칙으로 자동 검출.</p>
+                </div>
+                <div class="panel__actions">
+                  <a class="panel__action-link" href="#">지금 검사 실행</a>
+                </div>
+              </header>
+              <div class="panel__body">
+                <div class="silo__list">
+
+                  <div class="silo-alert silo-alert--danger">
+                    <span class="silo-alert__icon" aria-hidden="true">!</span>
+                    <div class="silo-alert__body">
+                      <span class="silo-alert__title">고아 노드 — 부모 누락</span>
+                      <span class="silo-alert__detail">/tutoring/sejong/이 시도 트리에 부모가 없습니다. theme tree 위반. 부모 노드를 생성하거나 노드를 dead로 강등해야 합니다.</span>
+                      <span class="silo-alert__url">/tutoring/sejong/ · region_id=sejong · parent_id=NULL</span>
+                    </div>
+                  </div>
+
+                  <div class="silo-alert silo-alert--warn">
+                    <span class="silo-alert__icon" aria-hidden="true">⚠</span>
+                    <div class="silo-alert__body">
+                      <span class="silo-alert__title">사일로 침범 — 외부 테마로 직접 링크</span>
+                      <span class="silo-alert__detail">/tutoring/seoul/gangnam-gu/ 본문에서 /academy/seoul/gangnam-gu/로 직접 링크. 자식이 다른 부모의 자식으로 링크 — 사일로 위반.</span>
+                      <span class="silo-alert__url">tutoring → academy 1건 · 앵커 "강남구 학원 정보"</span>
+                    </div>
+                  </div>
+
+                  <div class="silo-alert silo-alert--warn">
+                    <span class="silo-alert__icon" aria-hidden="true">⚠</span>
+                    <div class="silo-alert__body">
+                      <span class="silo-alert__title">자식 미등록 — 부모의 자식 목록에서 누락</span>
+                      <span class="silo-alert__detail">/tutoring/seoul/seocho-gu/banpo-dong/이 부모 페이지의 "동 목록" 섹션에서 빠져 있습니다. 자동 등록 또는 자식의 부모 ID 재확인이 필요합니다.</span>
+                      <span class="silo-alert__url">/tutoring/seoul/seocho-gu/banpo-dong/ · 부모 자식 목록 missing</span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <footer class="panel__footer">
+                <span>지난 30일 위반 7건 · 모두 처리 완료 → 현재 잔여 3건</span>
+                <a class="panel__action-link" href="#">처리 이력 보기</a>
+              </footer>
+            </section>
+
+            <section class="panel" aria-labelledby="rules-title">
+              <header class="panel__header">
+                <div class="panel__heading">
+                  <h3 class="panel__title" id="rules-title">검사 규칙 (5가지)</h3>
+                  <p class="panel__subtitle">매주 일요일 23:00 자동 실행. 위반 발생 시 Slack 알림.</p>
+                </div>
+              </header>
+              <div class="panel__body">
+                <ul class="rules">
+                  <li class="rules__item">
+                    <span class="rules__index">01</span>
+                    <div class="rules__body">
+                      <span class="rules__title">부모 없는 노드 (고아)</span>
+                      <span class="rules__detail">parent_id IS NULL AND depth &gt; 0 → 자동 noindex 후보</span>
+                    </div>
+                    <span class="rules__status">활성</span>
+                  </li>
+                  <li class="rules__item">
+                    <span class="rules__index">02</span>
+                    <div class="rules__body">
+                      <span class="rules__title">다른 테마로의 직접 링크</span>
+                      <span class="rules__detail">자식 노드의 본문 링크가 다른 사일로의 자식을 가리키는 경우</span>
+                    </div>
+                    <span class="rules__status">활성</span>
+                  </li>
+                  <li class="rules__item">
+                    <span class="rules__index">03</span>
+                    <div class="rules__body">
+                      <span class="rules__title">끊긴 내부 링크</span>
+                      <span class="rules__detail">live 노드 본문에 dead 또는 존재하지 않는 노드로의 링크</span>
+                    </div>
+                    <span class="rules__status">활성</span>
+                  </li>
+                  <li class="rules__item">
+                    <span class="rules__index">04</span>
+                    <div class="rules__body">
+                      <span class="rules__title">부모 자식 목록에서 누락된 자식</span>
+                      <span class="rules__detail">자식 노드의 H1이 부모 페이지의 자식 목록에 출현하지 않음</span>
+                    </div>
+                    <span class="rules__status">활성</span>
+                  </li>
+                  <li class="rules__item">
+                    <span class="rules__index">05</span>
+                    <div class="rules__body">
+                      <span class="rules__title">depth 정합 위반</span>
+                      <span class="rules__detail">node.depth ≠ parent.depth + 1 인 노드</span>
+                    </div>
+                    <span class="rules__status">활성</span>
+                  </li>
+                </ul>
+              </div>
+            </section>
+
+          </div>
+
+          <aside class="page-grid__aside">
+
+            <section class="panel" aria-labelledby="silo-stats-title">
+              <header class="panel__header">
+                <div class="panel__heading">
+                  <h3 class="panel__title" id="silo-stats-title">검사 요약</h3>
+                </div>
+              </header>
+              <div class="panel__body">
+                <div class="entity-stats">
+                  <div class="entity-stat">
+                    <span class="entity-stat__label">검사 노드</span>
+                    <span class="entity-stat__value">112</span>
+                    <span class="entity-stat__sub">전체 ContentNode</span>
+                  </div>
+                  <div class="entity-stat">
+                    <span class="entity-stat__label">위반 0</span>
+                    <span class="entity-stat__value">109</span>
+                    <span class="entity-stat__sub">97% 정합</span>
+                  </div>
+                  <div class="entity-stat">
+                    <span class="entity-stat__label">위반 발견</span>
+                    <span class="entity-stat__value">3</span>
+                    <span class="entity-stat__sub">danger 1 · warn 2</span>
+                  </div>
+                  <div class="entity-stat">
+                    <span class="entity-stat__label">평균 처리 시간</span>
+                    <span class="entity-stat__value">2.4<span class="entity-stat__sub" style="display:inline; font-size: 0.75em; margin-left: 4px;">시간</span></span>
+                    <span class="entity-stat__sub">최근 30일 기준</span>
+                  </div>
+                  <div class="entity-stat entity-stat--wide">
+                    <span class="entity-stat__label">다음 자동 검사</span>
+                    <span class="entity-stat__value" style="font-size: 1.25rem;">2026-05-10 23:00</span>
+                    <span class="entity-stat__sub">매주 일요일 cron</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel" aria-labelledby="forbid-title">
+              <header class="panel__header">
+                <div class="panel__heading">
+                  <h3 class="panel__title" id="forbid-title">사일로 보존 — 금지 사항</h3>
+                  <p class="panel__subtitle">권위 분산을 일으키는 행동.</p>
+                </div>
+              </header>
+              <div class="panel__body">
+                <ul class="rules">
+                  <li class="rules__item">
+                    <span class="rules__index">✗</span>
+                    <div class="rules__body">
+                      <span class="rules__title">모든 페이지 → 모든 페이지 링크</span>
+                      <span class="rules__detail">권위 분산 · "관련 글"의 무차별 노출</span>
+                    </div>
+                  </li>
+                  <li class="rules__item">
+                    <span class="rules__index">✗</span>
+                    <div class="rules__body">
+                      <span class="rules__title">푸터에 수백 개 지역 링크</span>
+                      <span class="rules__detail">스팸 신호로 인식 · 도메인 권위 손상</span>
+                    </div>
+                  </li>
+                  <li class="rules__item">
+                    <span class="rules__index">✗</span>
+                    <div class="rules__body">
+                      <span class="rules__title">자식이 다른 부모의 자식으로 링크</span>
+                      <span class="rules__detail">사일로 위반 · 토픽 권위 신호 약화</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </section>
+
+          </aside>
+
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+</body>
+</html>

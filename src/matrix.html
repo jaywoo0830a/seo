@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>데이터 매트릭스 — SEO 운영 콘솔</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Asta+Sans:wght@300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+  <div class="app">
+
+    <aside class="app__sidebar">
+      <div class="sidebar">
+        <div class="sidebar__brand">
+          <span class="sidebar__brand-eyebrow">SEO 운영</span>
+          <h1 class="sidebar__brand-title">다(多)테마 ×<br>지역 콘솔</h1>
+        </div>
+        <nav class="sidebar__nav" aria-label="대시보드 뷰">
+          <div class="sidebar__nav-group">
+            <span class="sidebar__nav-group-label">전체</span>
+            <ul class="sidebar__nav-list">
+              <li><a class="sidebar__nav-link" href="./index.html">개요</a></li>
+            </ul>
+          </div>
+          <div class="sidebar__nav-group">
+            <span class="sidebar__nav-group-label">사이트맵 5개 뷰</span>
+            <ul class="sidebar__nav-list">
+              <li><a class="sidebar__nav-link" href="./tree.html">발행 트리<span class="sidebar__nav-count">50</span></a></li>
+              <li><a class="sidebar__nav-link sidebar__nav-link--active" href="./matrix.html">데이터 매트릭스<span class="sidebar__nav-count">85</span></a></li>
+              <li><a class="sidebar__nav-link" href="./heatmap.html">KPI 히트맵</a></li>
+              <li><a class="sidebar__nav-link" href="./silo.html">사일로 무결성<span class="sidebar__nav-count sidebar__nav-count--alert">3</span></a></li>
+              <li><a class="sidebar__nav-link" href="./queue.html">갱신 큐<span class="sidebar__nav-count">14</span></a></li>
+            </ul>
+          </div>
+          <div class="sidebar__nav-group">
+            <span class="sidebar__nav-group-label">점검</span>
+            <ul class="sidebar__nav-list">
+              <li><a class="sidebar__nav-link" href="./risk.html">위험 지표</a></li>
+            </ul>
+          </div>
+        </nav>
+        <div class="sidebar__phase">
+          <span class="sidebar__phase-label">현재 단계</span>
+          <strong class="sidebar__phase-value">Phase 2</strong>
+          <span class="sidebar__phase-detail">Month 4 · 시도 허브 22 / 51</span>
+        </div>
+        <div class="sidebar__user">
+          <div class="sidebar__user-avatar" aria-hidden="true">김</div>
+          <div class="sidebar__user-body">
+            <span class="sidebar__user-name">김주원</span>
+            <span class="sidebar__user-role">SEO 운영자</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="app__main">
+      <div class="app__main-inner">
+
+        <header class="page-header">
+          <div class="page-header__heading">
+            <span class="page-header__eyebrow">사이트맵 뷰 · Data Matrix</span>
+            <h2 class="page-header__title">데이터 매트릭스 — Theme × Region</h2>
+            <p class="page-header__subtitle">◐ → ● 승급이 가장 효율적입니다 (검색 의도 검증, 데이터만 부족).</p>
+          </div>
+          <div class="page-header__meta">
+            <div class="page-header__meta-item">
+              <span class="page-header__meta-label">전체 셀</span>
+              <span class="page-header__meta-value">85</span>
+            </div>
+            <span class="page-header__divider" aria-hidden="true"></span>
+            <div class="page-header__meta-item">
+              <span class="page-header__meta-label">live / noindex / dead</span>
+              <span class="page-header__meta-value">28 / 13 / 44</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="page-grid">
+
+          <div class="page-grid__main">
+
+            <section class="panel" aria-labelledby="matrix-title">
+              <header class="panel__header">
+                <div class="panel__heading">
+                  <h3 class="panel__title" id="matrix-title">5 테마 × 7 시군구</h3>
+                  <p class="panel__subtitle">발행 대상 시군구만 표시. 데이터 부족 셀(○)은 페이지가 만들어지지 않습니다.</p>
+                </div>
+                <div class="panel__actions">
+                  <a class="panel__action-link" href="#">전체 17 시도 보기</a>
+                </div>
+              </header>
+
+              <div class="filter-bar" role="toolbar" aria-label="필터">
+                <div class="filter-bar__group">
+                  <span>상태</span>
+                  <button class="filter-bar__chip filter-bar__chip--active">전체</button>
+                  <button class="filter-bar__chip">● live</button>
+                  <button class="filter-bar__chip">◐ noindex</button>
+                  <button class="filter-bar__chip">○ dead</button>
+                </div>
+                <div class="filter-bar__group">
+                  <span>지역 깊이</span>
+                  <button class="filter-bar__chip">시도</button>
+                  <button class="filter-bar__chip filter-bar__chip--active">시군구</button>
+                  <button class="filter-bar__chip">동</button>
+                </div>
+              </div>
+
+              <div class="panel__body">
+                <div class="matrix">
+                  <table class="matrix__table">
+                    <caption class="visually-hidden">테마별 지역별 데이터 충족 현황</caption>
+                    <thead>
+                      <tr>
+                        <th class="matrix__corner">지역 \ 테마</th>
+                        <th class="matrix__col-head">과외 (수학)</th>
+                        <th class="matrix__col-head">과외 (영어)</th>
+                        <th class="matrix__col-head">학원</th>
+                        <th class="matrix__col-head">학습 콘텐츠</th>
+                        <th class="matrix__col-head">수업 도구</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th class="matrix__row-head">서울 강남구</th>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">9</span></span></td>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">11</span></span></td>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">12</span></span></td>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">15</span></span></td>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">6</span></span></td>
+                      </tr>
+                      <tr>
+                        <th class="matrix__row-head">서울 서초구</th>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">7</span></span></td>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">8</span></span></td>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">5</span></span></td>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">8</span></span></td>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--noindex">◐<span class="matrix__cell-count">3</span></span></td>
+                      </tr>
+                      <tr>
+                        <th class="matrix__row-head">서울 송파구</th>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">6</span></span></td>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--noindex">◐<span class="matrix__cell-count">4</span></span></td>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--noindex">◐<span class="matrix__cell-count">4</span></span></td>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--noindex">◐<span class="matrix__cell-count">2</span></span></td>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--dead">○<span class="matrix__cell-count">0</span></span></td>
+                      </tr>
+                      <tr>
+                        <th class="matrix__row-head">경기 군포시</th>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">8</span></span></td>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--noindex">◐<span class="matrix__cell-count">3</span></span></td>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--noindex">◐<span class="matrix__cell-count">3</span></span></td>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--dead">○<span class="matrix__cell-count">1</span></span></td>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--dead">○<span class="matrix__cell-count">0</span></span></td>
+                      </tr>
+                      <tr>
+                        <th class="matrix__row-head">경기 안양시</th>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">6</span></span></td>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">5</span></span></td>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">11</span></span></td>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--noindex">◐<span class="matrix__cell-count">2</span></span></td>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--dead">○<span class="matrix__cell-count">0</span></span></td>
+                      </tr>
+                      <tr>
+                        <th class="matrix__row-head">인천 연수구</th>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">9</span></span></td>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--noindex">◐<span class="matrix__cell-count">2</span></span></td>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--noindex">◐<span class="matrix__cell-count">3</span></span></td>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--dead">○<span class="matrix__cell-count">0</span></span></td>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--dead">○<span class="matrix__cell-count">0</span></span></td>
+                      </tr>
+                      <tr>
+                        <th class="matrix__row-head">부산 금정구</th>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--noindex">◐<span class="matrix__cell-count">2</span></span></td>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--dead">○<span class="matrix__cell-count">0</span></span></td>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--live">●<span class="matrix__cell-count">5</span></span></td>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--dead">○<span class="matrix__cell-count">0</span></span></td>
+                        <td class="matrix__cell"><span class="matrix__cell-mark matrix__cell-mark--dead">○<span class="matrix__cell-count">0</span></span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="matrix__legend">
+                  <span class="matrix__legend-item">
+                    <span class="matrix__legend-mark matrix__legend-mark--live"></span>
+                    <span><strong>●</strong> live · data ≥ 5 · 발행됨</span>
+                  </span>
+                  <span class="matrix__legend-item">
+                    <span class="matrix__legend-mark matrix__legend-mark--noindex"></span>
+                    <span><strong>◐</strong> noindex · data 1~4 · 보강 우선순위</span>
+                  </span>
+                  <span class="matrix__legend-item">
+                    <span class="matrix__legend-mark matrix__legend-mark--dead"></span>
+                    <span><strong>○</strong> dead · data 0 · 발행 금지</span>
+                  </span>
+                </div>
+              </div>
+              <footer class="panel__footer">
+                <span>전체 셀: 5 테마 × 17 시도 = 85 · 표시는 발행 대상 7개 시군구</span>
+                <span>● 28 · ◐ 13 · ○ 44</span>
+              </footer>
+            </section>
+
+          </div>
+
+          <aside class="page-grid__aside">
+
+            <section class="panel" aria-labelledby="upgrade-title">
+              <header class="panel__header">
+                <div class="panel__heading">
+                  <h3 class="panel__title" id="upgrade-title">승급 후보</h3>
+                  <p class="panel__subtitle">◐ 셀 중 5건까지 가장 가까운 노드.</p>
+                </div>
+              </header>
+              <div class="panel__body panel__body--flush">
+                <ul class="queue__list">
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p2">+1</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/tutoring/seoul/songpa-gu/ (영어)</span>
+                      <span class="queue-item__reason">data 4 → 5 도달까지 1건</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--noindex">◐</span>
+                    </div>
+                  </li>
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p2">+1</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/tutoring/seoul/songpa-gu/ (학원)</span>
+                      <span class="queue-item__reason">data 4 → 5 도달까지 1건</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--noindex">◐</span>
+                    </div>
+                  </li>
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p2">+1</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/academy/gangwon/ (시도)</span>
+                      <span class="queue-item__reason">data 4 → 5 도달까지 1건</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--noindex">◐</span>
+                    </div>
+                  </li>
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p2">+2</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/tutoring/gyeonggi/gunpo-si/ (영어)</span>
+                      <span class="queue-item__reason">data 3 → 5 도달까지 2건</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--noindex">◐</span>
+                    </div>
+                  </li>
+                  <li class="queue-item">
+                    <span class="queue-item__priority queue-item__priority--p2">+2</span>
+                    <div class="queue-item__body">
+                      <span class="queue-item__url">/tutoring/incheon/yeonsu-gu/ (영어)</span>
+                      <span class="queue-item__reason">data 3 → 5 도달까지 2건</span>
+                    </div>
+                    <div class="queue-item__meta">
+                      <span class="badge badge--noindex">◐</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </section>
+
+            <section class="panel" aria-labelledby="matrix-stats-title">
+              <header class="panel__header">
+                <div class="panel__heading">
+                  <h3 class="panel__title" id="matrix-stats-title">매트릭스 통계</h3>
+                </div>
+              </header>
+              <div class="panel__body">
+                <div class="entity-stats">
+                  <div class="entity-stat">
+                    <span class="entity-stat__label">테마 (column)</span>
+                    <span class="entity-stat__value">5</span>
+                    <span class="entity-stat__sub">depth ≤ 2</span>
+                  </div>
+                  <div class="entity-stat">
+                    <span class="entity-stat__label">시도 (row)</span>
+                    <span class="entity-stat__value">17</span>
+                    <span class="entity-stat__sub">전국</span>
+                  </div>
+                  <div class="entity-stat">
+                    <span class="entity-stat__label">발행됨 ●</span>
+                    <span class="entity-stat__value">28</span>
+                    <span class="entity-stat__sub">33% / 85</span>
+                  </div>
+                  <div class="entity-stat">
+                    <span class="entity-stat__label">승급 후보 ◐</span>
+                    <span class="entity-stat__value">13</span>
+                    <span class="entity-stat__sub">15% / 85</span>
+                  </div>
+                  <div class="entity-stat entity-stat--wide">
+                    <span class="entity-stat__label">미발행 ○</span>
+                    <span class="entity-stat__value">44</span>
+                    <span class="entity-stat__sub">52% / 85 · data 0</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+          </aside>
+
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+</body>
+</html>
